@@ -1,4 +1,5 @@
 #!/bin/bash
+#this script does arithmetic
 read -p "Give me 2 numbers: " firstnum secondnum
 echo "$firstnum plus $secondnum is $((firstnum + secondnum))"
 echo "$firstnum minus $secondnum is $((firstnum - secondnum))"
