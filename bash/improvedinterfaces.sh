@@ -28,6 +28,7 @@ for interface in ${interface_names[@]}; do
   ifspeeds[$interface]=$(ethtool $interface | grep Speed: | awk '{print $2}')
 done
 
+echo "We have $numinterfaces."
 # display the gathered interface data in interface name order
 for interface in `echo ${interface_names[@]}|sort`; do
   cat <<EOF
