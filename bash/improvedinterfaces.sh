@@ -19,7 +19,7 @@ declare -A ifspeeds # will be a hash with interface speeds, keyed using interfac
 # MAIN #
 ########
 # iterate over the interfaces array, gathering data into
-for interface in ${interface_names[@]}; do
+for interface in "${interface_names[@]}"; do
 # extract the assigned ip address(es) using ifconfig and store that in the ips hash
   v4ip[$interface]=`ip a s $interface|grep "inet "|awk '{print $2}'|sed 's,/.*,,'`
   v4name[$interface]=$(getent hosts ${v4ip[$interface]}|sed -e 's/.*  *//')
@@ -30,7 +30,7 @@ done
 
 echo "We have $numinterfaces."
 # display the gathered interface data in interface name order
-for interface in `echo ${interface_names[@]}|sort`; do
+for interface in `echo "${interface_names[@]}"|sort`; do
   cat <<EOF
 $interface @ ${ifspeeds[$interface]}
   ${v4ip[$interface]} ${v4name[$interface]}

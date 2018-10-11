@@ -13,7 +13,7 @@
 echo -n "ens33: "
 
 # this gets any ip addresses from our ifconfig output, hardcoded interface name ***********
-ifconfig ens33|grep inet|sed -e 's/.*addr: //' -e 's/.*addr://' -e 's/ .*//'|grep [[:print:]]
+ifconfig ens33|grep inet|sed -e 's/.*addr: //' -e 's/.*addr://' -e 's/ .*//'|"grep [[:print:]]"
 echo -n "External IP: "
 
 # relies on curl being installed and relies on live internet connection
