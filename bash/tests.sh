@@ -1,6 +1,6 @@
 #!/bin/bash
 file="/etc/resolv.conf"
-if [ -e $file ]; then
+if [ -f $file ]; then
   echo "file exists";
 else
   echo "file does not exist";
