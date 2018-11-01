@@ -53,11 +53,11 @@ while [ $count -gt 0 ]; do
         ;;
   *)
   esac
-  shift
+  shift #Shift to next command line input
 
-roll=$(( $RANDOM % $sides +1 ))
-sum=$(( $sum + $roll ))
-echo "Rolled $roll"
-count=$((count - 1))
+roll=$(( $RANDOM % $sides +1 )) #random number based on the number of sides inputted on dice
+sum=$(( $sum + $roll ))  #adds the rolls of the dice together and saves the total as $sum
+echo "Rolled $roll" #lets suer know the roll on a single die
+count=$((count - 1)) #numner of dice being rolled
 done
-echo "You rolled a total of $sum"
+echo "You rolled a total of $sum" #tells user the total of all the dice rolled
