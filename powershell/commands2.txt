@@ -1,0 +1,80 @@
+PS C:\Users\Andrew Eyre\tmp> $d
+
+Thursday, November 22, 2018 10:06:40 AM
+
+
+PS C:\Users\Andrew Eyre\tmp> $d.adddays(3.5)
+
+Sunday, November 25, 2018 10:06:40 PM
+
+
+PS C:\Users\Andrew Eyre\tmp> $d2 = $d.adddays(3.5);$d2
+
+Sunday, November 25, 2018 10:06:40 PM
+
+
+PS C:\Users\Andrew Eyre\tmp> $d3 = $d2.subtract($d);$d3
+
+
+Days              : 3
+Hours             : 12
+Minutes           : 0
+Seconds           : 0
+Milliseconds      : 0
+Ticks             : 3024000000000
+TotalDays         : 3.5
+TotalHours        : 84
+TotalMinutes      : 5040
+TotalSeconds      : 302400
+TotalMilliseconds : 302400000
+
+
+
+PS C:\Users\Andrew Eyre\tmp> $drives = gwmi -class win32_logicaldisk
+PS C:\Users\Andrew Eyre\tmp> $drives
+
+
+DeviceID     : C:
+DriveType    : 3
+ProviderName :
+FreeSpace    : 47269994496
+Size         : 64422408192
+VolumeName   :
+
+DeviceID     : D:
+DriveType    : 5
+ProviderName :
+FreeSpace    :
+Size         :
+VolumeName   :
+
+
+
+PS C:\Users\Andrew Eyre\tmp> $filesystems = $drives | where-object size -gt 0
+PS C:\Users\Andrew Eyre\tmp> $filesystems
+
+
+DeviceID     : C:
+DriveType    : 3
+ProviderName :
+FreeSpace    : 47269994496
+Size         : 64422408192
+VolumeName   :
+
+
+
+PS C:\Users\Andrew Eyre\tmp> $drives.count
+2
+PS C:\Users\Andrew Eyre\tmp> $drives | ? size -gt 0
+
+
+DeviceID     : C:
+DriveType    : 3
+ProviderName :
+FreeSpace    : 47269994496
+Size         : 64422408192
+VolumeName   :
+
+
+
+PS C:\Users\Andrew Eyre\tmp>

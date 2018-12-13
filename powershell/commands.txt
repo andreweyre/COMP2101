@@ -1,0 +1,2177 @@
+PS C:\Users\Andrew Eyre\tmp> get-process | where-object processname -eq powershell
+
+Handles  NPM(K)    PM(K)      WS(K)     CPU(s)     Id  SI ProcessName
+-------  ------    -----      -----     ------     --  -- -----------
+    841      56   108196     110300     129.05   4504   1 powershell
+
+
+PS C:\Users\Andrew Eyre\tmp> get-process | where-object cpu -gt 10
+
+Handles  NPM(K)    PM(K)      WS(K)     CPU(s)     Id  SI ProcessName
+-------  ------    -----      -----     ------     --  -- -----------
+    237      13     4888      13136      28.58   5452   1 conhost
+   1930     105    41056      66416      54.30   1684   1 explorer
+    840      56   108192     110316     129.09   4504   1 powershell
+    652      32    11964      25976      10.36   5416   1 RuntimeBroker
+   2081      31    26820      32040      61.42   6640   1 vmtoolsd
+
+
+PS C:\Users\Andrew Eyre\tmp> get-process | get-member -membertype property
+
+
+   TypeName: System.Diagnostics.Process
+
+Name                       MemberType Definition
+----                       ---------- ----------
+BasePriority               Property   int BasePriority {get;}
+Container                  Property   System.ComponentModel.IContainer Container {get;}
+EnableRaisingEvents        Property   bool EnableRaisingEvents {get;set;}
+ExitCode                   Property   int ExitCode {get;}
+ExitTime                   Property   datetime ExitTime {get;}
+Handle                     Property   System.IntPtr Handle {get;}
+HandleCount                Property   int HandleCount {get;}
+HasExited                  Property   bool HasExited {get;}
+Id                         Property   int Id {get;}
+MachineName                Property   string MachineName {get;}
+MainModule                 Property   System.Diagnostics.ProcessModule MainModule {get;}
+MainWindowHandle           Property   System.IntPtr MainWindowHandle {get;}
+MainWindowTitle            Property   string MainWindowTitle {get;}
+MaxWorkingSet              Property   System.IntPtr MaxWorkingSet {get;set;}
+MinWorkingSet              Property   System.IntPtr MinWorkingSet {get;set;}
+Modules                    Property   System.Diagnostics.ProcessModuleCollection Modules {get;}
+NonpagedSystemMemorySize   Property   int NonpagedSystemMemorySize {get;}
+NonpagedSystemMemorySize64 Property   long NonpagedSystemMemorySize64 {get;}
+PagedMemorySize            Property   int PagedMemorySize {get;}
+PagedMemorySize64          Property   long PagedMemorySize64 {get;}
+PagedSystemMemorySize      Property   int PagedSystemMemorySize {get;}
+PagedSystemMemorySize64    Property   long PagedSystemMemorySize64 {get;}
+PeakPagedMemorySize        Property   int PeakPagedMemorySize {get;}
+PeakPagedMemorySize64      Property   long PeakPagedMemorySize64 {get;}
+PeakVirtualMemorySize      Property   int PeakVirtualMemorySize {get;}
+PeakVirtualMemorySize64    Property   long PeakVirtualMemorySize64 {get;}
+PeakWorkingSet             Property   int PeakWorkingSet {get;}
+PeakWorkingSet64           Property   long PeakWorkingSet64 {get;}
+PriorityBoostEnabled       Property   bool PriorityBoostEnabled {get;set;}
+PriorityClass              Property   System.Diagnostics.ProcessPriorityClass PriorityClass {get;set;}
+PrivateMemorySize          Property   int PrivateMemorySize {get;}
+PrivateMemorySize64        Property   long PrivateMemorySize64 {get;}
+PrivilegedProcessorTime    Property   timespan PrivilegedProcessorTime {get;}
+ProcessName                Property   string ProcessName {get;}
+ProcessorAffinity          Property   System.IntPtr ProcessorAffinity {get;set;}
+Responding                 Property   bool Responding {get;}
+SafeHandle                 Property   Microsoft.Win32.SafeHandles.SafeProcessHandle SafeHandle {get;}
+SessionId                  Property   int SessionId {get;}
+Site                       Property   System.ComponentModel.ISite Site {get;set;}
+StandardError              Property   System.IO.StreamReader StandardError {get;}
+StandardInput              Property   System.IO.StreamWriter StandardInput {get;}
+StandardOutput             Property   System.IO.StreamReader StandardOutput {get;}
+StartInfo                  Property   System.Diagnostics.ProcessStartInfo StartInfo {get;set;}
+StartTime                  Property   datetime StartTime {get;}
+SynchronizingObject        Property   System.ComponentModel.ISynchronizeInvoke SynchronizingObject {get;set;}
+Threads                    Property   System.Diagnostics.ProcessThreadCollection Threads {get;}
+TotalProcessorTime         Property   timespan TotalProcessorTime {get;}
+UserProcessorTime          Property   timespan UserProcessorTime {get;}
+VirtualMemorySize          Property   int VirtualMemorySize {get;}
+VirtualMemorySize64        Property   long VirtualMemorySize64 {get;}
+WorkingSet                 Property   int WorkingSet {get;}
+WorkingSet64               Property   long WorkingSet64 {get;}
+
+
+PS C:\Users\Andrew Eyre\tmp> get-process | ? starttime -gt (get-date).adddays(-1)
+PS C:\Users\Andrew Eyre\tmp> get-process | ? starttime -gt (get-date).adddays(-7)
+
+Handles  NPM(K)    PM(K)      WS(K)     CPU(s)     Id  SI ProcessName
+-------  ------    -----      -----     ------     --  -- -----------
+    305      18     5292       6144       0.11   7284   1 taskhostw
+
+
+PS C:\Users\Andrew Eyre\tmp> get-process | ? starttime -gt (get-date).adddays(-14)
+
+Handles  NPM(K)    PM(K)      WS(K)     CPU(s)     Id  SI ProcessName
+-------  ------    -----      -----     ------     --  -- -----------
+    238      14     5672      18516      30.34   5452   1 conhost
+    155       9     1936       1868       0.13   6112   1 dllhost
+   1900     104    38900      69660      55.52   1684   1 explorer
+    145       9     1924       2996       3.16   6584   1 MSASCuiL
+    612      56    27048       9456       1.11   6876   1 OneDrive
+    886      56   108592     112612     129.59   4504   1 powershell
+    665      32    12172      25880      10.89   5416   1 RuntimeBroker
+    867      55    42528       1176       1.61   4168   1 SearchUI
+   1105      42    32176       2432       4.56   5124   1 ShellExperienceHost
+    475      16     5616      12792       3.67   5096   1 sihost
+    258      13     4784        168       0.13   6972   1 SkypeHost
+    356      19     6292      14288       1.67   1468   1 svchost
+    187      12     3268       5196       0.36   4376   1 svchost
+    481      26     5336       5692       0.34   6380   1 svchost
+    468      34     8360      10504       2.83   2028   1 taskhostw
+    305      18     5292       6144       0.11   7284   1 taskhostw
+   2079      31    26816      31844      61.50   6640   1 vmtoolsd
+
+
+PS C:\Users\Andrew Eyre\tmp> get-process | ? starttime -gt (get-date).adddays(-14) | Format-Table id,processname,starttime,cpu
+
+  Id ProcessName         StartTime                    CPU
+  -- -----------         ---------                    ---
+5452 conhost             11/1/2018 3:01:15 PM   30.609375
+6112 dllhost             11/1/2018 11:04:18 AM      0.125
+1684 explorer            11/1/2018 10:58:44 AM  55.515625
+6584 MSASCuiL            11/1/2018 10:59:06 AM    3.15625
+6876 OneDrive            11/1/2018 10:59:10 AM   1.109375
+4504 powershell          11/1/2018 3:01:15 PM  129.890625
+5416 RuntimeBroker       11/1/2018 10:58:55 AM  10.890625
+4168 SearchUI            11/1/2018 2:16:15 PM    1.609375
+5124 ShellExperienceHost 11/1/2018 10:58:55 AM     4.5625
+5096 sihost              11/1/2018 10:58:44 AM   3.671875
+6972 SkypeHost           11/1/2018 11:42:28 AM      0.125
+1468 svchost             11/1/2018 10:58:44 AM   1.671875
+4376 svchost             11/1/2018 10:58:44 AM   0.359375
+6380 svchost             11/1/2018 10:59:31 AM    0.34375
+2028 taskhostw           11/1/2018 10:58:44 AM   2.828125
+7284 taskhostw           11/8/2018 9:44:34 AM    0.109375
+6640 vmtoolsd            11/1/2018 10:59:07 AM  61.515625
+
+
+PS C:\Users\Andrew Eyre\tmp>
+PS C:\Users\Andrew Eyre\tmp> Get-Process
+
+Handles  NPM(K)    PM(K)      WS(K)     CPU(s)     Id  SI ProcessName
+-------  ------    -----      -----     ------     --  -- -----------
+    156      11     6284      11496       0.19   7380   0 audiodg
+    238      14     5652      15540      30.77   5452   1 conhost
+    428      18     1896       1904               428   0 csrss
+    247      16     1688       2420               524   1 csrss
+    231      13     4000       3964              3900   0 dllhost
+    155       9     1936       1836       0.13   6112   1 dllhost
+    454      27    34384      46744               304   1 dwm
+   2020     106    40756      67948      56.20   1684   1 explorer
+     45       7     2084       2288               820   1 fontdrvhost
+     45       6     1480        508               828   0 fontdrvhost
+      0       0       52          8                 0   0 Idle
+   1111      22     5864       9360               672   0 lsass
+    162      15     5464       2368              2832   0 ManagementAgentHost
+      0       0      240      24764              3144   0 Memory Compression
+    145       9     1924       2996       3.16   6584   1 MSASCuiL
+    196      13     3240        684              3128   0 msdtc
+    831      79   164348     103080              2896   0 MsMpEng
+    179      38     4904       2060              4360   0 NisSrv
+    612      56    27048       9456       1.11   6876   1 OneDrive
+    937      56   109836     114032     130.09   4504   1 powershell
+    661      32    12100      25832      10.89   5416   1 RuntimeBroker
+    598      40    21596      14196              1824   0 SearchIndexer
+    867      55    42528       1176       1.61   4168   1 SearchUI
+    411      14     4732       6456              2740   0 SecurityHealthService
+    522      10     4184       5452               660   0 services
+   1105      42    32176       2420       4.56   5124   1 ShellExperienceHost
+    471      16     5588      12776       3.67   5096   1 sihost
+    258      13     4784        168       0.13   6972   1 SkypeHost
+     52       3      444        240               320   0 smss
+    558      31    11640       6080              2416   0 spoolsv
+    134       7     1396       1364               528   0 svchost
+     70       5      928        556               772   0 svchost
+    962      21     9388      14860               796   0 svchost
+    842      16     5416       7656               920   0 svchost
+    209       8     2016       3232               960   0 svchost
+    143       9     1856       4156              1108   0 svchost
+    174      11     2192       4660              1116   0 svchost
+    401      14    14128      10828              1132   0 svchost
+    121      19     4128       4572              1220   0 svchost
+    198       9     2272       3616              1272   0 svchost
+    348      15     4248       7132              1356   0 svchost
+    185      11     2156       3344              1372   0 svchost
+    209      14     2868       4400              1416   0 svchost
+    356      19     6292      14288       1.67   1468   1 svchost
+    214      12     2432       4760              1544   0 svchost
+    131       7     1248       1028              1552   0 svchost
+    421       9     2952       5020              1572   0 svchost
+    338      11     2780       5436              1660   0 svchost
+    145      11     1752       4440              1804   0 svchost
+    377      18     5828       8100              1864   0 svchost
+    179      10     1812        812              1936   0 svchost
+    140       9     1848       3972              1944   0 svchost
+    210      12     2284       4092              1996   0 svchost
+    172      10     1768       2416              2004   0 svchost
+    487      19     3828       8500              2040   0 svchost
+    271      13     3116       5964              2108   0 svchost
+    111      10     1508       1820              2184   0 svchost
+    253      12     2012       2916              2192   0 svchost
+    148       9     1920       3380              2264   0 svchost
+    174      14     2396       3724              2300   0 svchost
+    447      34     9516      12136              2444   0 svchost
+    228       9     2052       4984              2468   0 svchost
+    167      11     1956       2908              2488   0 svchost
+    651      26    10316      16460              2644   0 svchost
+    298      19     9212      11848              2656   0 svchost
+    415     306    14288      13344              2668   0 svchost
+    422      17     9228      13348              2708   0 svchost
+    201      12     2548       5476              2724   0 svchost
+    152       9     3220       3508              2732   0 svchost
+    209      15     2572       4140              2752   0 svchost
+    134       9     3048       7308              2764   0 svchost
+    110       7     1220        728              2776   0 svchost
+    321      18     4112      10532              2876   0 svchost
+    243      14     2688       3644              3172   0 svchost
+    118       8     1584        968              3536   0 svchost
+    249      44     4132       7748              3576   0 svchost
+    247      13     3184       9284              4020   0 svchost
+    262      17     3988       8856              4048   0 svchost
+    187      12     3268       5196       0.36   4376   1 svchost
+    883     234    46112      38876              4648   0 svchost
+    287      20     5064       8392              4764   0 svchost
+    384      18     3492       9748              4872   0 svchost
+    452      28     9744      11196              5780   0 svchost
+    316      20     6784      11480              5864   0 svchost
+    102       8     1316       5372              6012   0 svchost
+    196      15     2168       3420              6280   0 svchost
+    181      11     2076       4104              6324   0 svchost
+    481      26     5336       5692       0.36   6380   1 svchost
+    111       7     1288        948              6712   0 svchost
+    199      15     6780       3232              7908   0 svchost
+   2296       0      140         24                 4   0 System
+    468      34     8360      10504       2.83   2028   1 taskhostw
+    305      18     5292       6144       0.11   7284   1 taskhostw
+    169      12     4660        720              2792   0 VGAuthService
+    111       7     1388        464              1388   0 vmacthlp
+    402      24     9672       8968              2804   0 vmtoolsd
+   2081      31    26816      31848      61.63   6640   1 vmtoolsd
+    141      10     1364        404               508   0 wininit
+    228      10     2360       3348               612   1 winlogon
+    626      23    13600      23956              4036   0 WmiPrvSE
+    253      12    20488      28344              5656   0 WmiPrvSE
+    422      14     3032       6032              1448   0 WUDFHost
+
+
+PS C:\Users\Andrew Eyre\tmp> Get-Process | Sort-Object
+
+Handles  NPM(K)    PM(K)      WS(K)     CPU(s)     Id  SI ProcessName
+-------  ------    -----      -----     ------     --  -- -----------
+    156      11     6328      11528       0.31   7380   0 audiodg
+    238      14     5656      15552      31.09   5452   1 conhost
+    247      16     1684       2416               524   1 csrss
+    428      18     1896       1904               428   0 csrss
+    155       9     1936       1836       0.13   6112   1 dllhost
+    231      13     4000       3964              3900   0 dllhost
+    454      27    35412      47392               304   1 dwm
+   2114     107    42008      68648      57.44   1684   1 explorer
+     45       6     1480        508               828   0 fontdrvhost
+     45       7     2084       2288               820   1 fontdrvhost
+      0       0       52          8                 0   0 Idle
+   1108      22     5864       9360               672   0 lsass
+    162      15     5464       2368              2832   0 ManagementAgentHost
+      0       0      240      24692              3144   0 Memory Compression
+    145       9     1924       2996       3.16   6584   1 MSASCuiL
+    196      13     3240        684              3128   0 msdtc
+    835      79   164348     104836              2896   0 MsMpEng
+    179      38     4904       2060              4360   0 NisSrv
+    612      56    27048       9456       1.11   6876   1 OneDrive
+    960      56   111916     116080     130.64   4504   1 powershell
+    661      32    12100      25832      10.89   5416   1 RuntimeBroker
+    598      40    21596      14196              1824   0 SearchIndexer
+    867      55    42528       1176       1.61   4168   1 SearchUI
+    411      14     4732       6456              2740   0 SecurityHealthService
+    522      10     4184       5452               660   0 services
+   1105      42    32176       2420       4.56   5124   1 ShellExperienceHost
+    471      16     5588      12776       3.67   5096   1 sihost
+    258      13     4784        168       0.13   6972   1 SkypeHost
+     52       3      444        240               320   0 smss
+    560      31    11640       6080              2416   0 spoolsv
+    134       9     3044       7312              2764   0 svchost
+    209      15     2556       4124              2752   0 svchost
+    152      10     3380       3556              2732   0 svchost
+    110       7     1220        728              2776   0 svchost
+    118       8     1584        968              3536   0 svchost
+    243      14     2688       3644              3172   0 svchost
+    321      18     4112      10532              2876   0 svchost
+    201      12     2544       5472              2724   0 svchost
+    167      11     1956       2908              2488   0 svchost
+    228       9     2052       4984              2468   0 svchost
+    447      34     9484      12112              2444   0 svchost
+    621      25    10084      16172              2644   0 svchost
+    422      17     9288      13400              2708   0 svchost
+    415     306    14288      13344              2668   0 svchost
+    298      19     9208      11844              2656   0 svchost
+    196      15     2168       3420              6280   0 svchost
+    102       8     1316       5372              6012   0 svchost
+    316      20     6784      11480              5864   0 svchost
+    181      11     2076       4104              6324   0 svchost
+    199      15     6780       3232              7908   0 svchost
+    111       7     1288        948              6712   0 svchost
+    481      26     5336       5692       0.36   6380   1 svchost
+    452      28     9744      11196              5780   0 svchost
+    260      16     3932       8828              4048   0 svchost
+    247      13     3152       9252              4020   0 svchost
+    249      44     4108       7724              3576   0 svchost
+    187      12     3268       5196       0.36   4376   1 svchost
+    384      18     3492       9748              4872   0 svchost
+    287      20     5064       8392              4764   0 svchost
+    883     234    46112      38876              4648   0 svchost
+    348      15     4248       7132              1356   0 svchost
+    198       9     2288       3624              1272   0 svchost
+    121      19     4128       4572              1220   0 svchost
+    185      11     2156       3344              1372   0 svchost
+    214      12     2432       4760              1544   0 svchost
+    356      19     6292      14288       1.67   1468   1 svchost
+    209      14     2868       4400              1416   0 svchost
+    403      14    13792      10424              1132   0 svchost
+    962      21     9388      14860               796   0 svchost
+     70       5      928        556               772   0 svchost
+    134       7     1396       1364               528   0 svchost
+    842      16     5424       7648               920   0 svchost
+    174      11     2192       4660              1116   0 svchost
+    143       9     1856       4156              1108   0 svchost
+    209       8     2016       3232               960   0 svchost
+    271      13     3120       5968              2108   0 svchost
+    487      19     3828       8500              2040   0 svchost
+    172      10     1768       2416              2004   0 svchost
+    111      10     1508       1820              2184   0 svchost
+    178      14     2448       3748              2300   0 svchost
+    147       9     1880       3340              2264   0 svchost
+    253      12     2012       2916              2192   0 svchost
+    210      12     2284       4092              1996   0 svchost
+    338      11     2780       5436              1660   0 svchost
+    421       9     2952       5020              1572   0 svchost
+    131       7     1248       1028              1552   0 svchost
+    145      11     1752       4440              1804   0 svchost
+    140       9     1848       3972              1944   0 svchost
+    179      10     1812        812              1936   0 svchost
+    377      18     5828       8100              1864   0 svchost
+   2322       0      140         24                 4   0 System
+    305      18     5292       6144       0.11   7284   1 taskhostw
+    468      34     8360      10504       2.83   2028   1 taskhostw
+    169      12     4660        720              2792   0 VGAuthService
+    111       7     1388        464              1388   0 vmacthlp
+   2081      31    26816      31848      61.69   6640   1 vmtoolsd
+    405      24     9676       9008              2804   0 vmtoolsd
+    141      10     1364        404               508   0 wininit
+    228      10     2360       3348               612   1 winlogon
+    253      12    20488      28344              5656   0 WmiPrvSE
+    626      23    13416      23760              4036   0 WmiPrvSE
+    422      14     3032       6032              1448   0 WUDFHost
+
+
+PS C:\Users\Andrew Eyre\tmp> Get-Process | Sort-Object cpu
+
+Handles  NPM(K)    PM(K)      WS(K)     CPU(s)     Id  SI ProcessName
+-------  ------    -----      -----     ------     --  -- -----------
+    297      19     9208      11844              2656   0 svchost
+    415     306    14288      13344              2668   0 svchost
+    422      17     9260      13380              2708   0 svchost
+    228       9     2052       4984              2468   0 svchost
+    167      11     1952       2904              2488   0 svchost
+    621      25    10096      16184              2644   0 svchost
+    130       8     2204       6472              2764   0 svchost
+    110       7     1220        728              2776   0 svchost
+    321      18     4112      10532              2876   0 svchost
+    201      12     2532       5460              2724   0 svchost
+    152       9     3220       3508              2732   0 svchost
+    209      15     2568       4136              2752   0 svchost
+    210      12     2288       4096              1996   0 svchost
+    172      10     1768       2416              2004   0 svchost
+    487      19     3828       8500              2040   0 svchost
+    378      18     5832       8112              1864   0 svchost
+    179      10     1812        812              1936   0 svchost
+    422      14     3032       6032              1448   0 WUDFHost
+    154       9     1928       3388              2264   0 svchost
+    178      14     2448       3748              2300   0 svchost
+    447      34     9484      12112              2444   0 svchost
+    270      13     3088       5944              2108   0 svchost
+    111      10     1508       1820              2184   0 svchost
+    253      12     2012       2916              2192   0 svchost
+    199      15     6780       3232              7908   0 svchost
+   2328       0      140         24                 4   0 System
+    169      12     4660        720              2792   0 VGAuthService
+    196      15     2168       3420              6280   0 svchost
+    181      11     2076       4104              6324   0 svchost
+    111       7     1288        948              6712   0 svchost
+    228      10     2360       3348               612   1 winlogon
+    626      23    13844      24132              4036   0 WmiPrvSE
+    253      12    20488      28344              5656   0 WmiPrvSE
+    111       7     1388        464              1388   0 vmacthlp
+    405      24     9676       9020              2804   0 vmtoolsd
+    141      10     1364        404               508   0 wininit
+    253      13     3236       9528              4020   0 svchost
+    260      16     3932       8828              4048   0 svchost
+    883     234    46112      38868              4648   0 svchost
+    243      14     2688       3644              3172   0 svchost
+    118       8     1584        968              3536   0 svchost
+    248      44     4108       7724              3576   0 svchost
+    452      28     9744      11196              5780   0 svchost
+    316      20     6784      11480              5864   0 svchost
+    102       8     1316       5372              6012   0 svchost
+    287      20     5064       8392              4764   0 svchost
+    384      18     3492       9748              4872   0 svchost
+    216      13     2964      11260              4944   0 svchost
+    145      11     1752       4440              1804   0 svchost
+    196      13     3240        684              3128   0 msdtc
+    840      79   164348     105020              2896   0 MsMpEng
+    162      15     5464       2368              2832   0 ManagementAgentHost
+      0       0      240      23780              3144   0 Memory Compression
+    179      38     4904       2060              4360   0 NisSrv
+    529      10     4184       5452               660   0 services
+     52       3      444        240               320   0 smss
+    598      40    21596      14196              1824   0 SearchIndexer
+    411      14     4732       6456              2740   0 SecurityHealthService
+    247      16     1684       2416               524   1 csrss
+    231      13     4000       3964              3900   0 dllhost
+    140       9     1848       3972              1944   0 svchost
+    432      19     1888       1900               428   0 csrss
+    456      27    35476      47456               304   1 dwm
+      0       0       52          8                 0   0 Idle
+   1110      22     5860       9364               672   0 lsass
+     45       7     2084       2288               820   1 fontdrvhost
+     45       6     1480        508               828   0 fontdrvhost
+    560      31    11640       6080              2416   0 spoolsv
+    121      19     4128       4572              1220   0 svchost
+    200       9     2292       3636              1272   0 svchost
+    348      15     4248       7132              1356   0 svchost
+    143       9     1856       4156              1108   0 svchost
+    174      11     2192       4660              1116   0 svchost
+    403      14    13976      10608              1132   0 svchost
+    131       7     1248       1028              1552   0 svchost
+    421       9     2952       5020              1572   0 svchost
+    338      11     2780       5436              1660   0 svchost
+    185      11     2156       3344              1372   0 svchost
+    212      14     2868       4400              1416   0 svchost
+    214      12     2432       4760              1544   0 svchost
+    212       8     2016       3232               960   0 svchost
+    134       7     1396       1364               528   0 svchost
+    847      16     5420       7656               920   0 svchost
+     70       5      928        556               772   0 svchost
+    971      21     9540      14932               796   0 svchost
+    305      18     5292       6144       0.11   7284   1 taskhostw
+    155       9     1936       1836       0.13   6112   1 dllhost
+    259      13     4800       6900       0.14   6972   1 SkypeHost
+    154      11     6756      11500       0.31   7380   0 audiodg
+    481      26     5336       5692       0.36   6380   1 svchost
+    187      12     3268       5196       0.36   4376   1 svchost
+    612      56    27048       9456       1.11   6876   1 OneDrive
+    867      55    42528       1176       1.61   4168   1 SearchUI
+    356      19     6292      14288       1.67   1468   1 svchost
+    468      34     8360      10504       2.83   2028   1 taskhostw
+    145       9     1924       2996       3.16   6584   1 MSASCuiL
+    475      16     5616      12792       3.69   5096   1 sihost
+   1105      42    32176       2420       4.56   5124   1 ShellExperienceHost
+    672      33    12276      26788      10.89   5416   1 RuntimeBroker
+    238      14     5656      15552      31.44   5452   1 conhost
+   2116     107    42084      68656      57.44   1684   1 explorer
+   2081      31    26816      31848      61.69   6640   1 vmtoolsd
+   1000      57   112676     116844     131.45   4504   1 powershell
+
+
+PS C:\Users\Andrew Eyre\tmp> Get-Process | Sort-Object cpu -descending
+
+Handles  NPM(K)    PM(K)      WS(K)     CPU(s)     Id  SI ProcessName
+-------  ------    -----      -----     ------     --  -- -----------
+   1051      56   116048     120236     131.55   4504   1 powershell
+   2081      31    26816      31848      61.69   6640   1 vmtoolsd
+   1922     105    41312      68400      57.44   1684   1 explorer
+    238      14     5656      15548      31.58   5452   1 conhost
+    671      32    12232      26684      10.89   5416   1 RuntimeBroker
+   1105      42    32176       2420       4.56   5124   1 ShellExperienceHost
+    474      16     5616      12788       3.69   5096   1 sihost
+    145       9     1924       2996       3.16   6584   1 MSASCuiL
+    468      34     8360      10504       2.83   2028   1 taskhostw
+    356      19     6292      14288       1.67   1468   1 svchost
+    867      55    42528       1176       1.61   4168   1 SearchUI
+    612      56    27048       9456       1.11   6876   1 OneDrive
+    187      12     3268       5196       0.36   4376   1 svchost
+    481      26     5336       5692       0.36   6380   1 svchost
+    155      10     6696      11468       0.31   7380   0 audiodg
+    259      13     4800       6900       0.14   6972   1 SkypeHost
+    155       9     1936       1836       0.13   6112   1 dllhost
+    305      18     5292       6144       0.11   7284   1 taskhostw
+    148       9     1912       3372              2264   0 svchost
+    321      18     4112      10532              2876   0 svchost
+    130       8     2204       6472              2764   0 svchost
+    110       7     1220        728              2776   0 svchost
+    243      14     2688       3644              3172   0 svchost
+    249      13     3236       9528              4020   0 svchost
+    446      34     9484      12112              2444   0 svchost
+    118       8     1584        968              3536   0 svchost
+    249      44     4108       7724              3576   0 svchost
+    415     306    14288      13344              2668   0 svchost
+    167      11     1948       2900              2488   0 svchost
+    152       9     3220       3508              2732   0 svchost
+    297      19     9260      11892              2656   0 svchost
+    621      25    10100      16196              2644   0 svchost
+    228       9     2052       4984              2468   0 svchost
+    422      17     9304      13432              2708   0 svchost
+    178      14     2448       3748              2300   0 svchost
+    201      12     2532       5460              2724   0 svchost
+    208      15     2580       4148              2752   0 svchost
+    260      16     3932       8828              4048   0 svchost
+    111       7     1388        464              1388   0 vmacthlp
+    405      24     9676       8804              2804   0 vmtoolsd
+    169      12     4660        720              2792   0 VGAuthService
+    199      15     6780       3232              7908   0 svchost
+   2298       0      140         24                 4   0 System
+    253      12    20488      28344              5656   0 WmiPrvSE
+    422      14     3032       6032              1448   0 WUDFHost
+    626      23    13844      24148              4036   0 WmiPrvSE
+    141      10     1364        404               508   0 wininit
+    228      10     2360       3348               612   1 winlogon
+    215      13     2960      11220              4944   0 svchost
+    452      28     9744      11196              5780   0 svchost
+    384      18     3492       9748              4872   0 svchost
+    883     234    46112      38812              4648   0 svchost
+    287      20     5064       8392              4764   0 svchost
+    181      11     2076       4104              6324   0 svchost
+    111       7     1288        948              6712   0 svchost
+    196      15     2168       3420              6280   0 svchost
+    316      20     6784      11480              5864   0 svchost
+    102       8     1316       5372              6012   0 svchost
+    411      14     4732       6456              2740   0 SecurityHealthService
+    526      10     4184       5452               660   0 services
+    598      40    21596      14196              1824   0 SearchIndexer
+    834      79   164348     102524              2896   0 MsMpEng
+    179      38     4904       2060              4360   0 NisSrv
+     52       3      444        240               320   0 smss
+    970      21     9508      14900               796   0 svchost
+    847      16     5460       7696               920   0 svchost
+     70       5      928        556               772   0 svchost
+    560      31    11640       6080              2416   0 spoolsv
+    134       7     1396       1364               528   0 svchost
+    455      26    35664      48048               304   1 dwm
+     45       7     2084       2288               820   1 fontdrvhost
+    231      13     4000       3964              3900   0 dllhost
+    432      19     1888       1900               428   0 csrss
+    247      16     1684       2416               524   1 csrss
+     45       6     1480        508               828   0 fontdrvhost
+      0       0      240      23240              3144   0 Memory Compression
+    196      13     3240        684              3128   0 msdtc
+    162      15     5464       2368              2832   0 ManagementAgentHost
+      0       0       52          8                 0   0 Idle
+   1102      22     5860       9364               672   0 lsass
+    207       8     2008       3224               960   0 svchost
+    179      10     1812        812              1936   0 svchost
+    140       9     1848       3972              1944   0 svchost
+    377      18     5828       8108              1864   0 svchost
+    338      11     2780       5436              1660   0 svchost
+    145      11     1752       4440              1804   0 svchost
+    210      12     2284       4092              1996   0 svchost
+    111      10     1508       1820              2184   0 svchost
+    253      12     2012       2916              2192   0 svchost
+    272      13     3088       5944              2108   0 svchost
+    172      10     1768       2416              2004   0 svchost
+    487      19     3828       8500              2040   0 svchost
+    121      19     4128       4572              1220   0 svchost
+    198       9     2296       3632              1272   0 svchost
+    403      14    13980      10612              1132   0 svchost
+    143       9     1856       4156              1108   0 svchost
+    174      11     2192       4660              1116   0 svchost
+    350      16     4248       7132              1356   0 svchost
+    131       7     1248       1028              1552   0 svchost
+    421       9     2952       5020              1572   0 svchost
+    214      12     2432       4760              1544   0 svchost
+    185      11     2156       3344              1372   0 svchost
+    211      14     2868       4400              1416   0 svchost
+
+
+PS C:\Users\Andrew Eyre\tmp> Get-wmiobject -class win32_process | sort parentprocessid, processname | ft -autosize processid, parentprocessid, processname
+
+processid parentprocessid ProcessName
+--------- --------------- -----------
+        4               0 System
+        0               0 System Idle Process
+     3144               4 Memory Compression
+      320               4 smss.exe
+      428             388 csrss.exe
+      508             388 wininit.exe
+      524             496 csrss.exe
+      612             496 winlogon.exe
+      828             508 fontdrvhost.exe
+      672             508 lsass.exe
+      660             508 services.exe
+     1448             528 WUDFHost.exe
+      304             612 dwm.exe
+      820             612 fontdrvhost.exe
+     3900             660 dllhost.exe
+     2832             660 ManagementAgentHost.exe
+     3128             660 msdtc.exe
+     2896             660 MsMpEng.exe
+     4360             660 NisSrv.exe
+     1824             660 SearchIndexer.exe
+     2740             660 SecurityHealthService.exe
+     2416             660 spoolsv.exe
+     2776             660 svchost.exe
+     6012             660 svchost.exe
+     2040             660 svchost.exe
+     5780             660 svchost.exe
+     2876             660 svchost.exe
+     7908             660 svchost.exe
+     2724             660 svchost.exe
+     2708             660 svchost.exe
+     2668             660 svchost.exe
+     2764             660 svchost.exe
+     2752             660 svchost.exe
+     2732             660 svchost.exe
+     4764             660 svchost.exe
+     4020             660 svchost.exe
+     6380             660 svchost.exe
+     6324             660 svchost.exe
+     5864             660 svchost.exe
+     6280             660 svchost.exe
+     4048             660 svchost.exe
+     4872             660 svchost.exe
+     3576             660 svchost.exe
+     3536             660 svchost.exe
+     3172             660 svchost.exe
+     1468             660 svchost.exe
+     4376             660 svchost.exe
+     6712             660 svchost.exe
+      772             660 svchost.exe
+     1416             660 svchost.exe
+     1356             660 svchost.exe
+     1372             660 svchost.exe
+     1572             660 svchost.exe
+     1660             660 svchost.exe
+     1544             660 svchost.exe
+     1552             660 svchost.exe
+     1272             660 svchost.exe
+      960             660 svchost.exe
+      528             660 svchost.exe
+      796             660 svchost.exe
+      920             660 svchost.exe
+     1132             660 svchost.exe
+     1220             660 svchost.exe
+     1108             660 svchost.exe
+     1116             660 svchost.exe
+     1804             660 svchost.exe
+     2644             660 svchost.exe
+     2488             660 svchost.exe
+     2184             660 svchost.exe
+     2468             660 svchost.exe
+     2300             660 svchost.exe
+     2444             660 svchost.exe
+     2192             660 svchost.exe
+     2264             660 svchost.exe
+     2108             660 svchost.exe
+     1864             660 svchost.exe
+     1936             660 svchost.exe
+     1944             660 svchost.exe
+     1996             660 svchost.exe
+     2656             660 svchost.exe
+     2004             660 svchost.exe
+     2792             660 VGAuthService.exe
+     1388             660 vmacthlp.exe
+     2804             660 vmtoolsd.exe
+     6112             796 dllhost.exe
+     5416             796 RuntimeBroker.exe
+     4168             796 SearchUI.exe
+     5124             796 ShellExperienceHost.exe
+     6972             796 SkypeHost.exe
+     5656             796 WmiPrvSE.exe
+     4036             796 WmiPrvSE.exe
+     1684            1408 explorer.exe
+     6584            1684 MSASCuiL.exe
+     6876            1684 OneDrive.exe
+     4504            1684 powershell.exe
+     6640            1684 vmtoolsd.exe
+     7284            1864 taskhostw.exe
+     2028            1864 taskhostw.exe
+     7380            2108 audiodg.exe
+     5096            2468 sihost.exe
+     5452            4504 conhost.exe
+
+
+PS C:\Users\Andrew Eyre\tmp> Get-wmiobject -class win32_process | Format-Table -autosize processid, parentprocessid, name
+
+processid parentprocessid name
+--------- --------------- ----
+        0               0 System Idle Process
+        4               0 System
+      320               4 smss.exe
+      428             388 csrss.exe
+      508             388 wininit.exe
+      524             496 csrss.exe
+      612             496 winlogon.exe
+      660             508 services.exe
+      672             508 lsass.exe
+      772             660 svchost.exe
+      796             660 svchost.exe
+      820             612 fontdrvhost.exe
+      828             508 fontdrvhost.exe
+      920             660 svchost.exe
+      960             660 svchost.exe
+      304             612 dwm.exe
+      528             660 svchost.exe
+     1108             660 svchost.exe
+     1116             660 svchost.exe
+     1132             660 svchost.exe
+     1220             660 svchost.exe
+     1272             660 svchost.exe
+     1356             660 svchost.exe
+     1372             660 svchost.exe
+     1388             660 vmacthlp.exe
+     1416             660 svchost.exe
+     1448             528 WUDFHost.exe
+     1544             660 svchost.exe
+     1552             660 svchost.exe
+     1572             660 svchost.exe
+     1660             660 svchost.exe
+     1804             660 svchost.exe
+     1864             660 svchost.exe
+     1936             660 svchost.exe
+     1944             660 svchost.exe
+     1996             660 svchost.exe
+     2004             660 svchost.exe
+     2108             660 svchost.exe
+     2184             660 svchost.exe
+     2192             660 svchost.exe
+     2264             660 svchost.exe
+     2300             660 svchost.exe
+     2416             660 spoolsv.exe
+     2444             660 svchost.exe
+     2468             660 svchost.exe
+     2488             660 svchost.exe
+     2644             660 svchost.exe
+     2656             660 svchost.exe
+     2668             660 svchost.exe
+     2708             660 svchost.exe
+     2724             660 svchost.exe
+     2732             660 svchost.exe
+     2740             660 SecurityHealthService.exe
+     2752             660 svchost.exe
+     2764             660 svchost.exe
+     2776             660 svchost.exe
+     2792             660 VGAuthService.exe
+     2804             660 vmtoolsd.exe
+     2832             660 ManagementAgentHost.exe
+     2876             660 svchost.exe
+     2896             660 MsMpEng.exe
+     2040             660 svchost.exe
+     3144               4 Memory Compression
+     3536             660 svchost.exe
+     3576             660 svchost.exe
+     3900             660 dllhost.exe
+     4036             796 WmiPrvSE.exe
+     3128             660 msdtc.exe
+     4360             660 NisSrv.exe
+     5096            2468 sihost.exe
+     4376             660 svchost.exe
+     1468             660 svchost.exe
+     4020             660 svchost.exe
+     1684            1408 explorer.exe
+     2028            1864 taskhostw.exe
+     4764             660 svchost.exe
+     1824             660 SearchIndexer.exe
+     5124             796 ShellExperienceHost.exe
+     5416             796 RuntimeBroker.exe
+     6584            1684 MSASCuiL.exe
+     6640            1684 vmtoolsd.exe
+     6876            1684 OneDrive.exe
+     4048             660 svchost.exe
+     6280             660 svchost.exe
+     5864             660 svchost.exe
+     6324             660 svchost.exe
+     6380             660 svchost.exe
+     6712             660 svchost.exe
+     3172             660 svchost.exe
+     6112             796 dllhost.exe
+     4872             660 svchost.exe
+     5780             660 svchost.exe
+     6972             796 SkypeHost.exe
+     4168             796 SearchUI.exe
+     4504            1684 powershell.exe
+     5452            4504 conhost.exe
+     7908             660 svchost.exe
+     7284            1864 taskhostw.exe
+     6012             660 svchost.exe
+
+
+PS C:\Users\Andrew Eyre\tmp> Get-wmiobject -class win32_process | sort parentprocessid, processid | Format-Table -autosize processid, parentprocessid, name
+
+processid parentprocessid name
+--------- --------------- ----
+        0               0 System Idle Process
+        4               0 System
+      320               4 smss.exe
+     3144               4 Memory Compression
+      428             388 csrss.exe
+      508             388 wininit.exe
+      524             496 csrss.exe
+      612             496 winlogon.exe
+      660             508 services.exe
+      672             508 lsass.exe
+      828             508 fontdrvhost.exe
+     1448             528 WUDFHost.exe
+      304             612 dwm.exe
+      820             612 fontdrvhost.exe
+      528             660 svchost.exe
+      772             660 svchost.exe
+      796             660 svchost.exe
+      920             660 svchost.exe
+      960             660 svchost.exe
+     1108             660 svchost.exe
+     1116             660 svchost.exe
+     1132             660 svchost.exe
+     1220             660 svchost.exe
+     1272             660 svchost.exe
+     1356             660 svchost.exe
+     1372             660 svchost.exe
+     1388             660 vmacthlp.exe
+     1416             660 svchost.exe
+     1468             660 svchost.exe
+     1544             660 svchost.exe
+     1552             660 svchost.exe
+     1572             660 svchost.exe
+     1660             660 svchost.exe
+     1804             660 svchost.exe
+     1824             660 SearchIndexer.exe
+     1864             660 svchost.exe
+     1936             660 svchost.exe
+     1944             660 svchost.exe
+     1996             660 svchost.exe
+     2004             660 svchost.exe
+     2040             660 svchost.exe
+     2108             660 svchost.exe
+     2184             660 svchost.exe
+     2192             660 svchost.exe
+     2264             660 svchost.exe
+     2300             660 svchost.exe
+     2416             660 spoolsv.exe
+     2444             660 svchost.exe
+     2468             660 svchost.exe
+     2488             660 svchost.exe
+     2644             660 svchost.exe
+     2656             660 svchost.exe
+     2668             660 svchost.exe
+     2708             660 svchost.exe
+     2724             660 svchost.exe
+     2732             660 svchost.exe
+     2740             660 SecurityHealthService.exe
+     2752             660 svchost.exe
+     2764             660 svchost.exe
+     2776             660 svchost.exe
+     2792             660 VGAuthService.exe
+     2804             660 vmtoolsd.exe
+     2832             660 ManagementAgentHost.exe
+     2876             660 svchost.exe
+     2896             660 MsMpEng.exe
+     3128             660 msdtc.exe
+     3172             660 svchost.exe
+     3536             660 svchost.exe
+     3576             660 svchost.exe
+     3900             660 dllhost.exe
+     4020             660 svchost.exe
+     4048             660 svchost.exe
+     4360             660 NisSrv.exe
+     4376             660 svchost.exe
+     4764             660 svchost.exe
+     4872             660 svchost.exe
+     5780             660 svchost.exe
+     5864             660 svchost.exe
+     6012             660 svchost.exe
+     6280             660 svchost.exe
+     6324             660 svchost.exe
+     6380             660 svchost.exe
+     6712             660 svchost.exe
+     7908             660 svchost.exe
+     4036             796 WmiPrvSE.exe
+     4168             796 SearchUI.exe
+     5124             796 ShellExperienceHost.exe
+     5416             796 RuntimeBroker.exe
+     6112             796 dllhost.exe
+     6972             796 SkypeHost.exe
+     1684            1408 explorer.exe
+     4504            1684 powershell.exe
+     6584            1684 MSASCuiL.exe
+     6640            1684 vmtoolsd.exe
+     6876            1684 OneDrive.exe
+     7292            1824 SearchFilterHost.exe
+     7760            1824 SearchProtocolHost.exe
+     2028            1864 taskhostw.exe
+     7284            1864 taskhostw.exe
+     5096            2468 sihost.exe
+     5452            4504 conhost.exe
+
+
+PS C:\Users\Andrew Eyre\tmp> "red","green","blue","yellow","orange"
+red
+green
+blue
+yellow
+orange
+PS C:\Users\Andrew Eyre\tmp> "red","green","blue","yellow","orange"|sort
+blue
+green
+orange
+red
+yellow
+PS C:\Users\Andrew Eyre\tmp> "red","green","blue","yellow","orange"|sort length
+red
+blue
+green
+orange
+yellow
+PS C:\Users\Andrew Eyre\tmp> "red","green","blue","yellow","orange"|get-member -MemberType property
+
+
+   TypeName: System.String
+
+Name   MemberType Definition
+----   ---------- ----------
+Length Property   int Length {get;}
+
+
+PS C:\Users\Andrew Eyre\tmp> "red","green","blue","yellow","orange"|sort length
+red
+blue
+green
+orange
+yellow
+PS C:\Users\Andrew Eyre\tmp> "red","green","blue","yellow","orange"|sort length -Descending
+yellow
+orange
+green
+blue
+red
+PS C:\Users\Andrew Eyre\tmp> "red","green","blue","yellow","orange"|sort length -Unique
+red
+blue
+green
+orange
+PS C:\Users\Andrew Eyre\tmp> (Get-Date),(Get-Date).adddays(-3),(get-date).adddhours(-1) | sort
+Method invocation failed because [System.DateTime] does not contain a method named 'adddhours'.
+At line:1 char:1
++ (Get-Date),(Get-Date).adddays(-3),(get-date).adddhours(-1) | sort
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidOperation: (:) [], RuntimeException
+    + FullyQualifiedErrorId : MethodNotFound
+
+PS C:\Users\Andrew Eyre\tmp> (Get-Date),(Get-Date).adddays(-3),(get-date).addhours(-1) | sort
+
+Monday, November 12, 2018 9:50:21 AM
+Thursday, November 15, 2018 8:50:21 AM
+Thursday, November 15, 2018 9:50:21 AM
+
+
+PS C:\Users\Andrew Eyre\tmp> (Get-Date),(Get-Date).adddays(-3),(get-date).addhours(-1) | sort hour
+
+Thursday, November 15, 2018 8:50:31 AM
+Thursday, November 15, 2018 9:50:31 AM
+Monday, November 12, 2018 9:50:31 AM
+
+
+PS C:\Users\Andrew Eyre\tmp> "red","green","blue","yellow","orange"|sort {$_.length}
+red
+blue
+green
+orange
+yellow
+PS C:\Users\Andrew Eyre\tmp> "red","green","blue","yellow","orange"|sort {$_.length % 2}
+orange
+yellow
+blue
+red
+green
+PS C:\Users\Andrew Eyre\tmp> Get-Process > procs.txt
+PS C:\Users\Andrew Eyre\tmp> Get-Process | export-csv procs.csv
+PS C:\Users\Andrew Eyre\tmp> Get-Process | export-clixml procs.xml
+PS C:\Users\Andrew Eyre\tmp> import-csv procs.csv | format-table * -autosize
+
+Name                  SI Handles VM            WS        PM        NPM    Path                                                                                           Company               CPU       FileVers
+                                                                                                                                                                                                         ion
+----                  -- ------- --            --        --        ---    ----                                                                                           -------               ---       --------
+conhost               1  238     2199160832000 10375168  5795840   13992  C:\Windows\system32\conhost.exe                                                                Microsoft Corporation 35.21875  10.0....
+csrss                 0  456     2199081340928 1503232   1900544   18960
+csrss                 1  255     2199073828864 1490944   1667072   16256
+dllhost               0  231     2199084580864 2719744   4096000   13680
+dllhost               1  155     2199096352768 1224704   1982464   9104   C:\Windows\system32\DllHost.exe                                                                Microsoft Corporation 0.140625  10.0....
+dwm                   1  448     2199234031616 41340928  38092800  27320
+explorer              1  1884    2199502733312 49487872  40210432  106616 C:\Windows\Explorer.EXE                                                                        Microsoft Corporation 58.890625 10.0....
+fontdrvhost           1  45      2199123959808 1527808   2134016   7064
+fontdrvhost           0  45      2199086931968 675840    1515520   6112
+Idle                  0  0       65536         8192      53248     136
+lsass                 0  1106    2199075266560 6840320   6057984   22024
+ManagementAgentHost   0  162     113483776     2400256   5595136   14880
+Memory Compression    0  0       45350912      20729856  229376    0
+MSASCuiL              1  155     2199117160448 2084864   2035712   9920   C:\Program Files\Windows Defender\MSASCuiL.exe                                                 Microsoft Corporation 3.15625   4.11....
+msdtc                 0  196     2199074689024 696320    3317760   12944
+MsMpEng               0  909     2199791230976 172269568 197869568 84304
+NisSrv                0  183     2199097745408 1277952   5283840   39080
+OneDrive              1  612     393551872     7352320   27697152  57432  C:\Users\Andrew Eyre\AppData\Local\Microsoft\OneDrive\OneDrive.exe                             Microsoft Corporation 1.140625  18.17...
+powershell            1  1217    2199837712384 97001472  119611392 57520  C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe                                      Microsoft Corporation 134.625   10.0....
+RuntimeBroker         1  656     2199253479424 14602240  12607488  33080  C:\Windows\System32\RuntimeBroker.exe                                                          Microsoft Corporation 11.0625   10.0....
+SearchFilterHost      0  120     2199071961088 8658944   2162688   9088
+SearchIndexer         0  624     2199175335936 16814080  23367680  41568
+SearchProtocolHost    0  349     2199109365760 13176832  2904064   13040
+SearchUI              1  867     2234033205248 1200128   43548672  56136  C:\Windows\SystemApps\Microsoft.Windows.Cortana_cw5n1h2txyewy\SearchUI.exe                     Microsoft Corporation 1.609375  10.0....
+SecurityHealthService 0  422     2199097847808 4882432   6291456   15096
+services              0  533     2199052828672 5050368   4395008   10480
+ShellExperienceHost   1  1241    2199386533888 37081088  34983936  45920  C:\Windows\SystemApps\ShellExperienceHost_cw5n1h2txyewy\ShellExperienceHost.exe                Microsoft Corporation 5.359375  10.0....
+sihost                1  478     2199147388928 7557120   5791744   16576  c:\windows\system32\sihost.exe                                                                 Microsoft Corporation 3.828125  10.0....
+SkypeHost             1  259     125796352     2994176   4915200   13592  C:\Program Files\WindowsApps\Microsoft.SkypeApp_12.1815.210.0_x64__kzf8qxf38zg5c\SkypeHost.exe Microsoft Corporation 0.140625  12.18...
+smss                  0  52      2199029911552 126976    454656    2680
+spoolsv               0  550     2199157874688 4108288   11681792  31680
+svchost               0  134     2199057874944 827392    1429504   7400
+svchost               0  70      2199047544832 413696    950272    5024
+svchost               0  977     2199120048128 12718080  9846784   21880
+svchost               0  264     2199130705920 7741440   8491008   22512
+svchost               0  835     2199072731136 7639040   6041600   16864
+svchost               0  211     2199058841600 2564096   2179072   7976
+svchost               0  143     2199070314496 2732032   1900544   9240
+svchost               0  174     2199068139520 3162112   2244608   11368
+svchost               0  400     2199084191744 11173888  15867904  14616
+svchost               0  120     2199061184512 4108288   4218880   19040
+svchost               0  197     2199062974464 3235840   2379776   9672
+svchost               0  349     2199079923712 5644288   4481024   16168
+svchost               0  185     2199076159488 2445312   2207744   11264
+svchost               0  209     2199074230272 3006464   2895872   13880
+svchost               1  363     2199167967232 8249344   6504448   19752  c:\windows\system32\svchost.exe                                                                Microsoft Corporation 1.828125  10.0....
+svchost               0  214     2199102050304 3137536   2490368   11960
+svchost               0  131     2199060914176 716800    1277952   7328
+svchost               0  430     2199074545664 4243456   3133440   9840
+svchost               0  345     2199071969280 4358144   2936832   11168
+svchost               0  145     2199065845760 2981888   1794048   11688
+svchost               0  389     2199114964992 7401472   6311936   19208
+svchost               0  179     2199071707136 737280    1855488   10248
+svchost               0  140     2199093604352 2547712   1937408   9368
+svchost               0  210     2199100841984 3194880   2342912   12728
+svchost               0  172     2199069908992 1667072   1810432   9976
+svchost               0  487     2199113510912 5357568   3985408   19816
+svchost               0  269     2199083372544 5066752   3166208   13168
+svchost               0  113     2199057952768 1245184   1634304   10120
+svchost               0  251     2199065333760 2113536   2109440   12528
+svchost               0  147     2199065894912 2375680   1937408   9264
+svchost               0  174     2199075688448 2572288   2404352   13848
+svchost               0  459     2199123361792 10784768  10092544  35160
+svchost               0  232     2199066329088 3338240   2211840   9648
+svchost               0  169     2199069270016 2420736   2052096   10944
+svchost               0  499     2199177932800 11255808  10260480  25736
+svchost               0  295     2199133605888 9715712   10354688  19272
+svchost               0  316     2199279132672 13561856  15056896  341464
+svchost               0  421     2199112024064 12312576  9682944   17224
+svchost               0  205     2203378810880 4165632   2613248   12024
+svchost               0  150     2199066279936 1904640   3239936   9584
+svchost               0  210     2199073996800 2912256   2686976   15744
+svchost               0  142     2199073107968 6197248   3850240   9104
+svchost               0  110     2199056818176 585728    1249280   7104
+svchost               0  321     2199109111808 5242880   4210688   18336
+svchost               0  250     2199120809984 4288512   2883584   14816
+svchost               0  118     2199062278144 741376    1622016   8600
+svchost               0  250     2199139803136 5582848   4091904   20832
+svchost               0  245     2199094841344 5406720   3301376   13376
+svchost               0  282     2199106068480 6561792   4366336   17376
+svchost               1  191     2199112617984 3153920   3452928   12640  c:\windows\system32\svchost.exe                                                                Microsoft Corporation 0.375     10.0....
+svchost               0  287     2199117389824 6250496   5185536   20880
+svchost               0  117     2199063339008 4325376   1765376   9376
+svchost               0  379     2199094792192 6250496   3592192   18800
+svchost               0  149     2199065473024 3403776   1724416   8896
+svchost               0  447     2199142051840 6836224   9940992   28416
+svchost               0  302     2199125053440 8015872   6451200   20352
+svchost               0  102     2199057969152 2695168   1347584   7728
+svchost               0  196     2199069478912 2330624   2195456   15024
+svchost               0  186     2199072079872 2924544   2396160   11448
+svchost               1  481     2199206150144 3272704   5464064   26248  c:\windows\system32\svchost.exe                                                                Microsoft Corporation 0.359375  10.0....
+svchost               0  111     2199057014784 884736    1318912   7336
+svchost               0  199     2199152132096 3076096   7077888   15768
+System                0  2239    3649536       24576     143360    136
+taskhostw             1  463     2199177883648 6160384   8609792   34640  c:\windows\system32\taskhostw.exe                                                              Microsoft Corporation 2.84375   10.0....
+taskhostw             1  461     2199178858496 11755520  10035200  23632                                                                                                                       2.96875
+VGAuthService         0  169     84529152      737280    4771840   12560
+vmacthlp              0  111     62263296      475136    1421312   7400
+vmtoolsd              0  407     110026752     7675904   9908224   24352
+vmtoolsd              1  2079    217772032     23752704  27463680  31912  C:\Program Files\VMware\VMware Tools\vmtoolsd.exe                                              VMware, Inc.          62.203125 10.1....
+wininit               0  141     2199078236160 409600    1396736   9968
+winlogon              1  224     2199086534656 1994752   2412544   10184
+WmiPrvSE              0  474     2199558438912 17641472  13697024  23176
+WUDFHost              0  419     2199070081024 4640768   3063808   13768
+
+
+PS C:\Users\Andrew Eyre\tmp> import-csv procs.csv | get-member
+
+
+   TypeName: CSV:System.Diagnostics.Process
+
+Name                       MemberType   Definition
+----                       ----------   ----------
+Equals                     Method       bool Equals(System.Object obj)
+GetHashCode                Method       int GetHashCode()
+GetType                    Method       type GetType()
+ToString                   Method       string ToString()
+BasePriority               NoteProperty string BasePriority=8
+Company                    NoteProperty string Company=Microsoft Corporation
+Container                  NoteProperty string Container=
+CPU                        NoteProperty string CPU=35.21875
+Description                NoteProperty string Description=Console Window Host
+EnableRaisingEvents        NoteProperty string EnableRaisingEvents=False
+ExitCode                   NoteProperty string ExitCode=
+ExitTime                   NoteProperty string ExitTime=
+FileVersion                NoteProperty string FileVersion=10.0.15063.0 (WinBuild.160101.0800)
+Handle                     NoteProperty string Handle=4884
+HandleCount                NoteProperty string HandleCount=238
+Handles                    NoteProperty string Handles=238
+HasExited                  NoteProperty string HasExited=False
+Id                         NoteProperty string Id=5452
+MachineName                NoteProperty string MachineName=.
+MainModule                 NoteProperty string MainModule=System.Diagnostics.ProcessModule (conhost.exe)
+MainWindowHandle           NoteProperty string MainWindowHandle=0
+MainWindowTitle            NoteProperty string MainWindowTitle=
+MaxWorkingSet              NoteProperty string MaxWorkingSet=1413120
+MinWorkingSet              NoteProperty string MinWorkingSet=204800
+Modules                    NoteProperty string Modules=System.Diagnostics.ProcessModuleCollection
+Name                       NoteProperty string Name=conhost
+NonpagedSystemMemorySize   NoteProperty string NonpagedSystemMemorySize=13992
+NonpagedSystemMemorySize64 NoteProperty string NonpagedSystemMemorySize64=13992
+NPM                        NoteProperty string NPM=13992
+PagedMemorySize            NoteProperty string PagedMemorySize=5795840
+PagedMemorySize64          NoteProperty string PagedMemorySize64=5795840
+PagedSystemMemorySize      NoteProperty string PagedSystemMemorySize=240672
+PagedSystemMemorySize64    NoteProperty string PagedSystemMemorySize64=240672
+Path                       NoteProperty string Path=C:\Windows\system32\conhost.exe
+PeakPagedMemorySize        NoteProperty string PeakPagedMemorySize=6873088
+PeakPagedMemorySize64      NoteProperty string PeakPagedMemorySize64=6873088
+PeakVirtualMemorySize      NoteProperty string PeakVirtualMemorySize=158957568
+PeakVirtualMemorySize64    NoteProperty string PeakVirtualMemorySize64=2199182213120
+PeakWorkingSet             NoteProperty string PeakWorkingSet=36724736
+PeakWorkingSet64           NoteProperty string PeakWorkingSet64=36724736
+PM                         NoteProperty string PM=5795840
+PriorityBoostEnabled       NoteProperty string PriorityBoostEnabled=True
+PriorityClass              NoteProperty string PriorityClass=Normal
+PrivateMemorySize          NoteProperty string PrivateMemorySize=5795840
+PrivateMemorySize64        NoteProperty string PrivateMemorySize64=5795840
+PrivilegedProcessorTime    NoteProperty string PrivilegedProcessorTime=00:00:31.8593750
+ProcessName                NoteProperty string ProcessName=conhost
+ProcessorAffinity          NoteProperty string ProcessorAffinity=15
+Product                    NoteProperty string Product=Microsoft? Windows? Operating System
+ProductVersion             NoteProperty string ProductVersion=10.0.15063.0
+Responding                 NoteProperty string Responding=True
+SafeHandle                 NoteProperty string SafeHandle=Microsoft.Win32.SafeHandles.SafeProcessHandle
+SessionId                  NoteProperty string SessionId=1
+SI                         NoteProperty string SI=1
+Site                       NoteProperty string Site=
+StandardError              NoteProperty string StandardError=
+StandardInput              NoteProperty string StandardInput=
+StandardOutput             NoteProperty string StandardOutput=
+StartInfo                  NoteProperty string StartInfo=System.Diagnostics.ProcessStartInfo
+StartTime                  NoteProperty string StartTime=11/1/2018 3:01:15 PM
+SynchronizingObject        NoteProperty string SynchronizingObject=
+Threads                    NoteProperty string Threads=System.Diagnostics.ProcessThreadCollection
+TotalProcessorTime         NoteProperty string TotalProcessorTime=00:00:35.2187500
+UserProcessorTime          NoteProperty string UserProcessorTime=00:00:03.3593750
+VirtualMemorySize          NoteProperty string VirtualMemorySize=137576448
+VirtualMemorySize64        NoteProperty string VirtualMemorySize64=2199160832000
+VM                         NoteProperty string VM=2199160832000
+WorkingSet                 NoteProperty string WorkingSet=10375168
+WorkingSet64               NoteProperty string WorkingSet64=10375168
+WS                         NoteProperty string WS=10375168
+__NounName                 NoteProperty string __NounName=Process
+
+
+PS C:\Users\Andrew Eyre\tmp> import-clixml procs.xml | get-member
+
+
+   TypeName: Deserialized.System.Diagnostics.Process
+
+Name                       MemberType   Definition
+----                       ----------   ----------
+GetType                    Method       type GetType()
+ToString                   Method       string ToString(), string ToString(string format, System.IFormatProvider formatProvider), string IFormattable.ToString(string format, System.IFormatProvider formatPro...
+Company                    NoteProperty string Company=Microsoft Corporation
+CPU                        NoteProperty double CPU=35.25
+Description                NoteProperty string Description=Console Window Host
+FileVersion                NoteProperty string FileVersion=10.0.15063.0 (WinBuild.160101.0800)
+Handles                    NoteProperty int Handles=238
+Name                       NoteProperty string Name=conhost
+NPM                        NoteProperty long NPM=13992
+Path                       NoteProperty string Path=C:\Windows\system32\conhost.exe
+PM                         NoteProperty long PM=5795840
+Product                    NoteProperty string Product=Microsoft® Windows® Operating System
+ProductVersion             NoteProperty string ProductVersion=10.0.15063.0
+SI                         NoteProperty int SI=1
+VM                         NoteProperty long VM=2199160832000
+WS                         NoteProperty long WS=10383360
+__NounName                 NoteProperty string __NounName=Process
+BasePriority               Property     System.Int32 {get;set;}
+Container                  Property      {get;set;}
+EnableRaisingEvents        Property     System.Boolean {get;set;}
+Handle                     Property     Deserialized.System.IntPtr {get;set;}
+HandleCount                Property     System.Int32 {get;set;}
+HasExited                  Property     System.Boolean {get;set;}
+Id                         Property     System.Int32 {get;set;}
+MachineName                Property     System.String {get;set;}
+MainModule                 Property     Deserialized.System.Diagnostics.ProcessModule {get;set;}
+MainWindowHandle           Property     Deserialized.System.IntPtr {get;set;}
+MainWindowTitle            Property     System.String {get;set;}
+MaxWorkingSet              Property     Deserialized.System.IntPtr {get;set;}
+MinWorkingSet              Property     Deserialized.System.IntPtr {get;set;}
+Modules                    Property     Deserialized.System.Diagnostics.ProcessModuleCollection {get;set;}
+NonpagedSystemMemorySize   Property     System.Int32 {get;set;}
+NonpagedSystemMemorySize64 Property     System.Int64 {get;set;}
+PagedMemorySize            Property     System.Int32 {get;set;}
+PagedMemorySize64          Property     System.Int64 {get;set;}
+PagedSystemMemorySize      Property     System.Int32 {get;set;}
+PagedSystemMemorySize64    Property     System.Int64 {get;set;}
+PeakPagedMemorySize        Property     System.Int32 {get;set;}
+PeakPagedMemorySize64      Property     System.Int64 {get;set;}
+PeakVirtualMemorySize      Property     System.Int32 {get;set;}
+PeakVirtualMemorySize64    Property     System.Int64 {get;set;}
+PeakWorkingSet             Property     System.Int32 {get;set;}
+PeakWorkingSet64           Property     System.Int64 {get;set;}
+PriorityBoostEnabled       Property     System.Boolean {get;set;}
+PriorityClass              Property     Deserialized.System.Diagnostics.ProcessPriorityClass {get;set;}
+PrivateMemorySize          Property     System.Int32 {get;set;}
+PrivateMemorySize64        Property     System.Int64 {get;set;}
+PrivilegedProcessorTime    Property     System.TimeSpan {get;set;}
+ProcessName                Property     System.String {get;set;}
+ProcessorAffinity          Property     Deserialized.System.IntPtr {get;set;}
+Responding                 Property     System.Boolean {get;set;}
+SafeHandle                 Property     Deserialized.Microsoft.Win32.SafeHandles.SafeProcessHandle {get;set;}
+SessionId                  Property     System.Int32 {get;set;}
+Site                       Property      {get;set;}
+StartInfo                  Property     Deserialized.System.Diagnostics.ProcessStartInfo {get;set;}
+StartTime                  Property     System.DateTime {get;set;}
+SynchronizingObject        Property      {get;set;}
+Threads                    Property     Deserialized.System.Diagnostics.ProcessThreadCollection {get;set;}
+TotalProcessorTime         Property     System.TimeSpan {get;set;}
+UserProcessorTime          Property     System.TimeSpan {get;set;}
+VirtualMemorySize          Property     System.Int32 {get;set;}
+VirtualMemorySize64        Property     System.Int64 {get;set;}
+WorkingSet                 Property     System.Int32 {get;set;}
+WorkingSet64               Property     System.Int64 {get;set;}
+PSConfiguration            PropertySet  PSConfiguration {Name, Id, PriorityClass, FileVersion}
+PSResources                PropertySet  PSResources {Name, Id, Handlecount, WorkingSet, NonPagedMemorySize, PagedMemorySize, PrivateMemorySize, VirtualMemorySize, Threads.Count, TotalProcessorTime}
+
+
+PS C:\Users\Andrew Eyre\tmp> get-date | convertto-csv
+#TYPE System.DateTime
+"DisplayHint","DateTime","Date","Day","DayOfWeek","DayOfYear","Hour","Kind","Millisecond","Minute","Month","Second","Ticks","TimeOfDay","Year"
+"DateTime","Thursday, November 15, 2018 10:23:29 AM","11/15/2018 12:00:00 AM","15","Thursday","319","10","Local","169","23","11","29","636778742091699801","10:23:29.1699801","2018"
+PS C:\Users\Andrew Eyre\tmp> get-date | convertto-json
+{
+    "value":  "\/Date(1542295420068)\/",
+    "DisplayHint":  2,
+    "DateTime":  "Thursday, November 15, 2018 10:23:40 AM"
+}
+PS C:\Users\Andrew Eyre\tmp> get-date | select * | convertto-json
+{
+    "DisplayHint":  2,
+    "DateTime":  "Thursday, November 15, 2018 10:23:57 AM",
+    "Date":  "\/Date(1542258000000)\/",
+    "Day":  15,
+    "DayOfWeek":  4,
+    "DayOfYear":  319,
+    "Hour":  10,
+    "Kind":  2,
+    "Millisecond":  861,
+    "Minute":  23,
+    "Month":  11,
+    "Second":  57,
+    "Ticks":  636778742378613544,
+    "TimeOfDay":  {
+                      "Ticks":  374378613544,
+                      "Days":  0,
+                      "Hours":  10,
+                      "Milliseconds":  861,
+                      "Minutes":  23,
+                      "Seconds":  57,
+                      "TotalDays":  0.43330858049074072,
+                      "TotalHours":  10.399405931777777,
+                      "TotalMilliseconds":  37437861.3544,
+                      "TotalMinutes":  623.9643559066667,
+                      "TotalSeconds":  37437.861354399996
+                  },
+    "Year":  2018
+}
+PS C:\Users\Andrew Eyre\tmp> get-date | convertto-html
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>HTML TABLE</title>
+</head><body>
+<table>
+<colgroup><col/><col/><col/><col/><col/><col/><col/><col/><col/><col/><col/><col/><col/><col/><col/></colgroup>
+<tr><th>DisplayHint</th><th>DateTime</th><th>Date</th><th>Day</th><th>DayOfWeek</th><th>DayOfYear</th><th>Hour</th><th>Kind</th><th>Millisecond</th><th>Minute</th><th>Month</th><th>Second</th><th>Ticks</th><th>
+TimeOfDay</th><th>Year</th></tr>
+<tr><td>DateTime</td><td>Thursday, November 15, 2018 10:25:28 AM</td><td>11/15/2018 12:00:00 AM</td><td>15</td><td>Thursday</td><td>319</td><td>10</td><td>Local</td><td>262</td><td>25</td><td>11</td><td>28</td>
+<td>636778743282627917</td><td>10:25:28.2627917</td><td>2018</td></tr>
+</table>
+</body></html>
+PS C:\Users\Andrew Eyre\tmp> get-date | convertto-csv | convertfrom-csv | get-member
+
+
+   TypeName: CSV:System.DateTime
+
+Name        MemberType   Definition
+----        ----------   ----------
+Equals      Method       bool Equals(System.Object obj)
+GetHashCode Method       int GetHashCode()
+GetType     Method       type GetType()
+ToString    Method       string ToString()
+Date        NoteProperty string Date=11/15/2018 12:00:00 AM
+DateTime    NoteProperty string DateTime=Thursday, November 15, 2018 10:26:28 AM
+Day         NoteProperty string Day=15
+DayOfWeek   NoteProperty string DayOfWeek=Thursday
+DayOfYear   NoteProperty string DayOfYear=319
+DisplayHint NoteProperty string DisplayHint=DateTime
+Hour        NoteProperty string Hour=10
+Kind        NoteProperty string Kind=Local
+Millisecond NoteProperty string Millisecond=222
+Minute      NoteProperty string Minute=26
+Month       NoteProperty string Month=11
+Second      NoteProperty string Second=28
+Ticks       NoteProperty string Ticks=636778743882221202
+TimeOfDay   NoteProperty string TimeOfDay=10:26:28.2221202
+Year        NoteProperty string Year=2018
+
+
+PS C:\Users\Andrew Eyre\tmp> get-member | convertto-json | convertfrom-json | get-member
+get-member : You must specify an object for the Get-Member cmdlet.
+At line:1 char:1
++ get-member | convertto-json | convertfrom-json | get-member
++ ~~~~~~~~~~
+    + CategoryInfo          : CloseError: (:) [Get-Member], InvalidOperationException
+    + FullyQualifiedErrorId : NoObjectInGetMember,Microsoft.PowerShell.Commands.GetMemberCommand
+
+get-member : You must specify an object for the Get-Member cmdlet.
+At line:1 char:50
++ get-member | convertto-json | convertfrom-json | get-member
++                                                  ~~~~~~~~~~
+    + CategoryInfo          : CloseError: (:) [Get-Member], InvalidOperationException
+    + FullyQualifiedErrorId : NoObjectInGetMember,Microsoft.PowerShell.Commands.GetMemberCommand
+
+PS C:\Users\Andrew Eyre\tmp> get-date | select-object year,month,day | format-table -autosize
+
+Year Month Day
+---- ----- ---
+2018    11  15
+
+
+PS C:\Users\Andrew Eyre\tmp> gwmi -class win32_processor | select -property name, numberofcores
+
+name                                      numberofcores
+----                                      -------------
+Intel(R) Core(TM) i7-7700HQ CPU @ 2.80GHz             2
+Intel(R) Core(TM) i7-7700HQ CPU @ 2.80GHz             2
+
+
+PS C:\Users\Andrew Eyre\tmp> get-process | sort cpu | select -last 5
+
+Handles  NPM(K)    PM(K)      WS(K)     CPU(s)     Id  SI ProcessName
+-------  ------    -----      -----     ------     --  -- -----------
+    705      34    12516      10504      11.39   5416   1 RuntimeBroker
+    238      14     5660       8816      37.84   5452   1 conhost
+   1903     105    39684      40792      65.30   1684   1 explorer
+   2079      31    26820      21192      65.72   6640   1 vmtoolsd
+    806      64   157048     130824     145.63   4504   1 powershell
+
+
+PS C:\Users\Andrew Eyre\tmp> get-process | select processname -unique
+
+ProcessName
+-----------
+audiodg
+conhost
+csrss
+dllhost
+dwm
+explorer
+fontdrvhost
+Idle
+lsass
+ManagementAgentHost
+Memory Compression
+MSASCuiL
+msdtc
+MsMpEng
+NisSrv
+OneDrive
+powershell
+RuntimeBroker
+SearchIndexer
+SearchUI
+SecurityHealthService
+services
+ShellExperienceHost
+sihost
+SkypeHost
+smss
+spoolsv
+svchost
+System
+SystemSettingsBroker
+taskhostw
+VGAuthService
+vmacthlp
+vmtoolsd
+wininit
+winlogon
+WmiPrvSE
+WUDFHost
+
+
+PS C:\Users\Andrew Eyre\tmp> get-process | select id,processname -unique
+
+  Id ProcessName
+  -- -----------
+5380 audiodg
+5452 conhost
+ 428 csrss
+ 524 csrss
+3900 dllhost
+6112 dllhost
+ 304 dwm
+1684 explorer
+ 820 fontdrvhost
+ 828 fontdrvhost
+   0 Idle
+ 672 lsass
+2832 ManagementAgentHost
+3144 Memory Compression
+6584 MSASCuiL
+3128 msdtc
+2896 MsMpEng
+4360 NisSrv
+6876 OneDrive
+4504 powershell
+5416 RuntimeBroker
+4520 SearchFilterHost
+1824 SearchIndexer
+7264 SearchProtocolHost
+4168 SearchUI
+2740 SecurityHealthService
+ 660 services
+5124 ShellExperienceHost
+5096 sihost
+6972 SkypeHost
+ 320 smss
+2416 spoolsv
+ 528 svchost
+ 772 svchost
+ 796 svchost
+ 920 svchost
+ 960 svchost
+1108 svchost
+1116 svchost
+1132 svchost
+1220 svchost
+1272 svchost
+1356 svchost
+1372 svchost
+1416 svchost
+1468 svchost
+1536 svchost
+1544 svchost
+1552 svchost
+1572 svchost
+1660 svchost
+1804 svchost
+1864 svchost
+1936 svchost
+1944 svchost
+1996 svchost
+2004 svchost
+2040 svchost
+2108 svchost
+2184 svchost
+2192 svchost
+2264 svchost
+2300 svchost
+2444 svchost
+2468 svchost
+2488 svchost
+2644 svchost
+2656 svchost
+2668 svchost
+2708 svchost
+2724 svchost
+2732 svchost
+2752 svchost
+2764 svchost
+2776 svchost
+2876 svchost
+3172 svchost
+3536 svchost
+3576 svchost
+4020 svchost
+4048 svchost
+4376 svchost
+4764 svchost
+4872 svchost
+5780 svchost
+5864 svchost
+6012 svchost
+6280 svchost
+6324 svchost
+6380 svchost
+6712 svchost
+7908 svchost
+   4 System
+6544 SystemSettingsBroker
+2028 taskhostw
+7284 taskhostw
+2792 VGAuthService
+1388 vmacthlp
+2804 vmtoolsd
+6640 vmtoolsd
+ 508 wininit
+ 612 winlogon
+4036 WmiPrvSE
+1448 WUDFHost
+
+
+PS C:\Users\Andrew Eyre\tmp> "red","green","blue","yellow","orange"|select -index 1,3
+green
+yellow
+PS C:\Users\Andrew Eyre\tmp> "red","green","blue","yellow","orange"|select -index 1,5
+green
+PS C:\Users\Andrew Eyre\tmp> "red","green","blue","yellow","orange"|select -index
+Select-Object : Missing an argument for parameter 'Index'. Specify a parameter of type 'System.Int32[]' and try again.
+At line:1 char:47
++ "red","green","blue","yellow","orange"|select -index
++                                               ~~~~~~
+    + CategoryInfo          : InvalidArgument: (:) [Select-Object], ParameterBindingException
+    + FullyQualifiedErrorId : MissingArgument,Microsoft.PowerShell.Commands.SelectObjectCommand
+
+PS C:\Users\Andrew Eyre\tmp> "red","green","blue","yellow","orange"|select -index 5
+PS C:\Users\Andrew Eyre\tmp> "red","green","blue","yellow","orange"|select -index 0
+red
+PS C:\Users\Andrew Eyre\tmp> "red","green","blue","yellow","orange"|sort |select -index 0
+blue
+PS C:\Users\Andrew Eyre\tmp> "red","green","blue","yellow","orange"|sort |select -index 0,1,2,3
+blue
+green
+orange
+red
+PS C:\Users\Andrew Eyre\tmp> "red","green","blue","yellow","orange"|sort length |select -index 0,1,2,3
+red
+blue
+green
+orange
+PS C:\Users\Andrew Eyre\tmp> "red","green","blue","yellow","orange"|sort length |select -index 0,4
+red
+yellow
+PS C:\Users\Andrew Eyre\tmp> get-date | select year,month,day
+
+Year Month Day
+---- ----- ---
+2018    11  15
+
+
+PS C:\Users\Andrew Eyre\tmp> get-wmiobject win32_processor
+
+
+Caption           : Intel64 Family 6 Model 158 Stepping 9
+DeviceID          : CPU0
+Manufacturer      : GenuineIntel
+MaxClockSpeed     : 2808
+Name              : Intel(R) Core(TM) i7-7700HQ CPU @ 2.80GHz
+SocketDesignation : CPU #000
+
+Caption           : Intel64 Family 6 Model 158 Stepping 9
+DeviceID          : CPU1
+Manufacturer      : GenuineIntel
+MaxClockSpeed     : 2808
+Name              : Intel(R) Core(TM) i7-7700HQ CPU @ 2.80GHz
+SocketDesignation : CPU #001
+
+
+
+PS C:\Users\Andrew Eyre\tmp> get-wmiobject win32_processor | get-member -membertype property
+
+
+   TypeName: System.Management.ManagementObject#root\cimv2\Win32_Processor
+
+Name                                    MemberType Definition
+----                                    ---------- ----------
+AddressWidth                            Property   uint16 AddressWidth {get;set;}
+Architecture                            Property   uint16 Architecture {get;set;}
+AssetTag                                Property   string AssetTag {get;set;}
+Availability                            Property   uint16 Availability {get;set;}
+Caption                                 Property   string Caption {get;set;}
+Characteristics                         Property   uint32 Characteristics {get;set;}
+ConfigManagerErrorCode                  Property   uint32 ConfigManagerErrorCode {get;set;}
+ConfigManagerUserConfig                 Property   bool ConfigManagerUserConfig {get;set;}
+CpuStatus                               Property   uint16 CpuStatus {get;set;}
+CreationClassName                       Property   string CreationClassName {get;set;}
+CurrentClockSpeed                       Property   uint32 CurrentClockSpeed {get;set;}
+CurrentVoltage                          Property   uint16 CurrentVoltage {get;set;}
+DataWidth                               Property   uint16 DataWidth {get;set;}
+Description                             Property   string Description {get;set;}
+DeviceID                                Property   string DeviceID {get;set;}
+ErrorCleared                            Property   bool ErrorCleared {get;set;}
+ErrorDescription                        Property   string ErrorDescription {get;set;}
+ExtClock                                Property   uint32 ExtClock {get;set;}
+Family                                  Property   uint16 Family {get;set;}
+InstallDate                             Property   string InstallDate {get;set;}
+L2CacheSize                             Property   uint32 L2CacheSize {get;set;}
+L2CacheSpeed                            Property   uint32 L2CacheSpeed {get;set;}
+L3CacheSize                             Property   uint32 L3CacheSize {get;set;}
+L3CacheSpeed                            Property   uint32 L3CacheSpeed {get;set;}
+LastErrorCode                           Property   uint32 LastErrorCode {get;set;}
+Level                                   Property   uint16 Level {get;set;}
+LoadPercentage                          Property   uint16 LoadPercentage {get;set;}
+Manufacturer                            Property   string Manufacturer {get;set;}
+MaxClockSpeed                           Property   uint32 MaxClockSpeed {get;set;}
+Name                                    Property   string Name {get;set;}
+NumberOfCores                           Property   uint32 NumberOfCores {get;set;}
+NumberOfEnabledCore                     Property   uint32 NumberOfEnabledCore {get;set;}
+NumberOfLogicalProcessors               Property   uint32 NumberOfLogicalProcessors {get;set;}
+OtherFamilyDescription                  Property   string OtherFamilyDescription {get;set;}
+PartNumber                              Property   string PartNumber {get;set;}
+PNPDeviceID                             Property   string PNPDeviceID {get;set;}
+PowerManagementCapabilities             Property   uint16[] PowerManagementCapabilities {get;set;}
+PowerManagementSupported                Property   bool PowerManagementSupported {get;set;}
+ProcessorId                             Property   string ProcessorId {get;set;}
+ProcessorType                           Property   uint16 ProcessorType {get;set;}
+Revision                                Property   uint16 Revision {get;set;}
+Role                                    Property   string Role {get;set;}
+SecondLevelAddressTranslationExtensions Property   bool SecondLevelAddressTranslationExtensions {get;set;}
+SerialNumber                            Property   string SerialNumber {get;set;}
+SocketDesignation                       Property   string SocketDesignation {get;set;}
+Status                                  Property   string Status {get;set;}
+StatusInfo                              Property   uint16 StatusInfo {get;set;}
+Stepping                                Property   string Stepping {get;set;}
+SystemCreationClassName                 Property   string SystemCreationClassName {get;set;}
+SystemName                              Property   string SystemName {get;set;}
+ThreadCount                             Property   uint32 ThreadCount {get;set;}
+UniqueId                                Property   string UniqueId {get;set;}
+UpgradeMethod                           Property   uint16 UpgradeMethod {get;set;}
+Version                                 Property   string Version {get;set;}
+VirtualizationFirmwareEnabled           Property   bool VirtualizationFirmwareEnabled {get;set;}
+VMMonitorModeExtensions                 Property   bool VMMonitorModeExtensions {get;set;}
+VoltageCaps                             Property   uint32 VoltageCaps {get;set;}
+__CLASS                                 Property   string __CLASS {get;set;}
+__DERIVATION                            Property   string[] __DERIVATION {get;set;}
+__DYNASTY                               Property   string __DYNASTY {get;set;}
+__GENUS                                 Property   int __GENUS {get;set;}
+__NAMESPACE                             Property   string __NAMESPACE {get;set;}
+__PATH                                  Property   string __PATH {get;set;}
+__PROPERTY_COUNT                        Property   int __PROPERTY_COUNT {get;set;}
+__RELPATH                               Property   string __RELPATH {get;set;}
+__SERVER                                Property   string __SERVER {get;set;}
+__SUPERCLASS                            Property   string __SUPERCLASS {get;set;}
+
+
+PS C:\Users\Andrew Eyre\tmp> get-wmiobject win32_processor | select name,numberofcores | get-member
+
+
+   TypeName: Selected.System.Management.ManagementObject
+
+Name          MemberType   Definition
+----          ----------   ----------
+Equals        Method       bool Equals(System.Object obj)
+GetHashCode   Method       int GetHashCode()
+GetType       Method       type GetType()
+ToString      Method       string ToString()
+name          NoteProperty string name=Intel(R) Core(TM) i7-7700HQ CPU @ 2.80GHz
+numberofcores NoteProperty uint32 numberofcores=2
+
+
+PS C:\Users\Andrew Eyre\tmp> get-wmiobject win32_processor | select name,numberofcores
+
+name                                      numberofcores
+----                                      -------------
+Intel(R) Core(TM) i7-7700HQ CPU @ 2.80GHz             2
+Intel(R) Core(TM) i7-7700HQ CPU @ 2.80GHz             2
+
+
+PS C:\Users\Andrew Eyre\tmp> get-wmiobject win32_processor | select name,numberofcores | get-member
+
+
+   TypeName: Selected.System.Management.ManagementObject
+
+Name          MemberType   Definition
+----          ----------   ----------
+Equals        Method       bool Equals(System.Object obj)
+GetHashCode   Method       int GetHashCode()
+GetType       Method       type GetType()
+ToString      Method       string ToString()
+name          NoteProperty string name=Intel(R) Core(TM) i7-7700HQ CPU @ 2.80GHz
+numberofcores NoteProperty uint32 numberofcores=2
+
+
+PS C:\Users\Andrew Eyre\tmp> true
+true : The term 'true' is not recognized as the name of a cmdlet, function, script file, or operable program. Check the spelling of the name, or if a path was included, verify that the path is correct and try
+again.
+At line:1 char:1
++ true
++ ~~~~
+    + CategoryInfo          : ObjectNotFound: (true:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+
+PS C:\Users\Andrew Eyre\tmp> $true
+True
+PS C:\Users\Andrew Eyre\tmp> 1.3
+1.3
+PS C:\Users\Andrew Eyre\tmp> 63e-3
+0.063
+PS C:\Users\Andrew Eyre\tmp> 255220518451461515656565653231316464646
+2.55220518451462E+38
+PS C:\Users\Andrew Eyre\tmp> 66446646644646466464
+66446646644646466464
+PS C:\Users\Andrew Eyre\tmp> 54546454455454545454545455
+54546454455454545454545455
+PS C:\Users\Andrew Eyre\tmp> 1555151515156655656565656566
+1555151515156655656565656566
+PS C:\Users\Andrew Eyre\tmp> 215155115115551556521515115511515
+2.15155115115552E+32
+PS C:\Users\Andrew Eyre\tmp> 5151515151551515151551151551515
+5.15151515155152E+30
+PS C:\Users\Andrew Eyre\tmp> 15155151515155115151515555555
+15155151515155115151515555555
+PS C:\Users\Andrew Eyre\tmp> 151515151515151515199999999999
+1.51515151515152E+29
+PS C:\Users\Andrew Eyre\tmp>
+PS C:\Users\Andrew Eyre\tmp> 5gb
+5368709120
+PS C:\Users\Andrew Eyre\tmp> 1gb
+1073741824
+PS C:\Users\Andrew Eyre\tmp> 1GB
+1073741824
+PS C:\Users\Andrew Eyre\tmp> 5kb
+5120
+PS C:\Users\Andrew Eyre\tmp> 1b
+1b : The term '1b' is not recognized as the name of a cmdlet, function, script file, or operable program. Check the spelling of the name, or if a path was included, verify that the path is correct and try
+again.
+At line:1 char:1
++ 1b
++ ~~
+    + CategoryInfo          : ObjectNotFound: (1b:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+
+PS C:\Users\Andrew Eyre\tmp> 10b
+10b : The term '10b' is not recognized as the name of a cmdlet, function, script file, or operable program. Check the spelling of the name, or if a path was included, verify that the path is correct and try
+again.
+At line:1 char:1
++ 10b
++ ~~~
+    + CategoryInfo          : ObjectNotFound: (10b:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+
+PS C:\Users\Andrew Eyre\tmp> 1mb
+1048576
+PS C:\Users\Andrew Eyre\tmp> 1kb
+1024
+PS C:\Users\Andrew Eyre\tmp> 1xb
+1xb : The term '1xb' is not recognized as the name of a cmdlet, function, script file, or operable program. Check the spelling of the name, or if a path was included, verify that the path is correct and try
+again.
+At line:1 char:1
++ 1xb
++ ~~~
+    + CategoryInfo          : ObjectNotFound: (1xb:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+
+PS C:\Users\Andrew Eyre\tmp> 1ub
+1ub : The term '1ub' is not recognized as the name of a cmdlet, function, script file, or operable program. Check the spelling of the name, or if a path was included, verify that the path is correct and try
+again.
+At line:1 char:1
++ 1ub
++ ~~~
+    + CategoryInfo          : ObjectNotFound: (1ub:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+
+PS C:\Users\Andrew Eyre\tmp> 6.34mb
+6647971.84
+PS C:\Users\Andrew Eyre\tmp> 6mb > kb
+PS C:\Users\Andrew Eyre\tmp> 6mb < kb
+At line:1 char:5
++ 6mb < kb
++     ~
+The '<' operator is reserved for future use.
+    + CategoryInfo          : ParserError: (:) [], ParentContainsErrorRecordException
+    + FullyQualifiedErrorId : RedirectionNotSupported
+
+PS C:\Users\Andrew Eyre\tmp> [double]12
+12
+PS C:\Users\Andrew Eyre\tmp> [double]12.5566
+12.5566
+PS C:\Users\Andrew Eyre\tmp> [char]12.5566
+Cannot convert value "12.5566" to type "System.Char". Error: "Invalid cast from 'Double' to 'Char'."
+At line:1 char:1
++ [char]12.5566
++ ~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidArgument: (:) [], RuntimeException
+    + FullyQualifiedErrorId : InvalidCastIConvertible
+
+PS C:\Users\Andrew Eyre\tmp> [char]12
+
+PS C:\Users\Andrew Eyre\tmp> 567
+567
+PS C:\Users\Andrew Eyre\tmp> [double]567
+567
+PS C:\Users\Andrew Eyre\tmp> 6.3
+6.3
+PS C:\Users\Andrew Eyre\tmp> [double]6.3
+6.3
+PS C:\Users\Andrew Eyre\tmp> [int]7
+7
+PS C:\Users\Andrew Eyre\tmp> [int]6.5
+6
+PS C:\Users\Andrew Eyre\tmp> [int]6.51
+7
+PS C:\Users\Andrew Eyre\tmp> [int]6.50
+6
+PS C:\Users\Andrew Eyre\tmp> 1,2,3,4,5
+1
+2
+3
+4
+5
+PS C:\Users\Andrew Eyre\tmp> 1..5
+1
+2
+3
+4
+5
+PS C:\Users\Andrew Eyre\tmp> ("12").gettype()
+
+IsPublic IsSerial Name                                     BaseType
+-------- -------- ----                                     --------
+True     True     String                                   System.Object
+
+
+PS C:\Users\Andrew Eyre\tmp> ("12").gettype().name
+String
+PS C:\Users\Andrew Eyre\tmp> ("12") | get-member
+
+
+   TypeName: System.String
+
+Name             MemberType            Definition
+----             ----------            ----------
+Clone            Method                System.Object Clone(), System.Object ICloneable.Clone()
+CompareTo        Method                int CompareTo(System.Object value), int CompareTo(string strB), int IComparable.CompareTo(System.Object obj), int IComparable[string].CompareTo(string other)
+Contains         Method                bool Contains(string value)
+CopyTo           Method                void CopyTo(int sourceIndex, char[] destination, int destinationIndex, int count)
+EndsWith         Method                bool EndsWith(string value), bool EndsWith(string value, System.StringComparison comparisonType), bool EndsWith(string value, bool ignoreCase, cultureinfo culture)
+Equals           Method                bool Equals(System.Object obj), bool Equals(string value), bool Equals(string value, System.StringComparison comparisonType), bool IEquatable[string].Equals(string other)
+GetEnumerator    Method                System.CharEnumerator GetEnumerator(), System.Collections.IEnumerator IEnumerable.GetEnumerator(), System.Collections.Generic.IEnumerator[char] IEnumerable[char].GetEn...
+GetHashCode      Method                int GetHashCode()
+GetType          Method                type GetType()
+GetTypeCode      Method                System.TypeCode GetTypeCode(), System.TypeCode IConvertible.GetTypeCode()
+IndexOf          Method                int IndexOf(char value), int IndexOf(char value, int startIndex), int IndexOf(char value, int startIndex, int count), int IndexOf(string value), int IndexOf(string val...
+IndexOfAny       Method                int IndexOfAny(char[] anyOf), int IndexOfAny(char[] anyOf, int startIndex), int IndexOfAny(char[] anyOf, int startIndex, int count)
+Insert           Method                string Insert(int startIndex, string value)
+IsNormalized     Method                bool IsNormalized(), bool IsNormalized(System.Text.NormalizationForm normalizationForm)
+LastIndexOf      Method                int LastIndexOf(char value), int LastIndexOf(char value, int startIndex), int LastIndexOf(char value, int startIndex, int count), int LastIndexOf(string value), int La...
+LastIndexOfAny   Method                int LastIndexOfAny(char[] anyOf), int LastIndexOfAny(char[] anyOf, int startIndex), int LastIndexOfAny(char[] anyOf, int startIndex, int count)
+Normalize        Method                string Normalize(), string Normalize(System.Text.NormalizationForm normalizationForm)
+PadLeft          Method                string PadLeft(int totalWidth), string PadLeft(int totalWidth, char paddingChar)
+PadRight         Method                string PadRight(int totalWidth), string PadRight(int totalWidth, char paddingChar)
+Remove           Method                string Remove(int startIndex, int count), string Remove(int startIndex)
+Replace          Method                string Replace(char oldChar, char newChar), string Replace(string oldValue, string newValue)
+Split            Method                string[] Split(Params char[] separator), string[] Split(char[] separator, int count), string[] Split(char[] separator, System.StringSplitOptions options), string[] Spl...
+StartsWith       Method                bool StartsWith(string value), bool StartsWith(string value, System.StringComparison comparisonType), bool StartsWith(string value, bool ignoreCase, cultureinfo culture)
+Substring        Method                string Substring(int startIndex), string Substring(int startIndex, int length)
+ToBoolean        Method                bool IConvertible.ToBoolean(System.IFormatProvider provider)
+ToByte           Method                byte IConvertible.ToByte(System.IFormatProvider provider)
+ToChar           Method                char IConvertible.ToChar(System.IFormatProvider provider)
+ToCharArray      Method                char[] ToCharArray(), char[] ToCharArray(int startIndex, int length)
+ToDateTime       Method                datetime IConvertible.ToDateTime(System.IFormatProvider provider)
+ToDecimal        Method                decimal IConvertible.ToDecimal(System.IFormatProvider provider)
+ToDouble         Method                double IConvertible.ToDouble(System.IFormatProvider provider)
+ToInt16          Method                int16 IConvertible.ToInt16(System.IFormatProvider provider)
+ToInt32          Method                int IConvertible.ToInt32(System.IFormatProvider provider)
+ToInt64          Method                long IConvertible.ToInt64(System.IFormatProvider provider)
+ToLower          Method                string ToLower(), string ToLower(cultureinfo culture)
+ToLowerInvariant Method                string ToLowerInvariant()
+ToSByte          Method                sbyte IConvertible.ToSByte(System.IFormatProvider provider)
+ToSingle         Method                float IConvertible.ToSingle(System.IFormatProvider provider)
+ToString         Method                string ToString(), string ToString(System.IFormatProvider provider), string IConvertible.ToString(System.IFormatProvider provider)
+ToType           Method                System.Object IConvertible.ToType(type conversionType, System.IFormatProvider provider)
+ToUInt16         Method                uint16 IConvertible.ToUInt16(System.IFormatProvider provider)
+ToUInt32         Method                uint32 IConvertible.ToUInt32(System.IFormatProvider provider)
+ToUInt64         Method                uint64 IConvertible.ToUInt64(System.IFormatProvider provider)
+ToUpper          Method                string ToUpper(), string ToUpper(cultureinfo culture)
+ToUpperInvariant Method                string ToUpperInvariant()
+Trim             Method                string Trim(Params char[] trimChars), string Trim()
+TrimEnd          Method                string TrimEnd(Params char[] trimChars)
+TrimStart        Method                string TrimStart(Params char[] trimChars)
+Chars            ParameterizedProperty char Chars(int index) {get;}
+Length           Property              int Length {get;}
+
+
+PS C:\Users\Andrew Eyre\tmp> ("12").gettype()
+
+IsPublic IsSerial Name                                     BaseType
+-------- -------- ----                                     --------
+True     True     String                                   System.Object
+
+
+PS C:\Users\Andrew Eyre\tmp> ("12").gettype().name
+String
+PS C:\Users\Andrew Eyre\tmp> ([int]"12").gettype().name
+Int32
+PS C:\Users\Andrew Eyre\tmp> ([int256]"1545454545545722828282828282828282822856565645545454545454582828255252525282828282828288282828282545545485484848454545544884845454548484545484545454842").gettype().name
+Unable to find type [int256].
+At line:1 char:3
++ ([int256]"15454545455457228282828282828282828228565656455454545454545 ...
++   ~~~~~~
+    + CategoryInfo          : InvalidOperation: (int256:TypeName) [], RuntimeException
+    + FullyQualifiedErrorId : TypeNotFound
+
+PS C:\Users\Andrew Eyre\tmp> ([int128]"1545454545545722828282828282828282822856565645545454545454582828255252525282828282828288282828282545545485484848454545544884845454548484545484545454842").gettype().name
+Unable to find type [int128].
+At line:1 char:3
++ ([int128]"15454545455457228282828282828282828228565656455454545454545 ...
++   ~~~~~~
+    + CategoryInfo          : InvalidOperation: (int128:TypeName) [], RuntimeException
+    + FullyQualifiedErrorId : TypeNotFound
+
+PS C:\Users\Andrew Eyre\tmp> ([int64]"1545454545545722828282828282828282822856565645545454545454582828255252525282828282828288282828282545545485484848454545544884845454548484545484545454842").gettype().name
+Cannot convert value "1545454545545722828282828282828282822856565645545454545454582828255252525282828282828288282828282545545485484848454545544884845454548484545484545454842" to type "System.Int64". Error:
+"Value was either too large or too small for an Int64."
+At line:1 char:1
++ ([int64]"154545454554572282828282828282828282285656564554545454545458 ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidArgument: (:) [], RuntimeException
+    + FullyQualifiedErrorId : InvalidCastFromStringToInteger
+
+PS C:\Users\Andrew Eyre\tmp> ([int64]"154545454554572282828282828282828282285656564554545454545458282825525252528282828282828822").gettype().name
+Cannot convert value "154545454554572282828282828282828282285656564554545454545458282825525252528282828282828822" to type "System.Int64". Error: "Value was either too large or too small for an Int64."
+At line:1 char:1
++ ([int64]"154545454554572282828282828282828282285656564554545454545458 ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidArgument: (:) [], RuntimeException
+    + FullyQualifiedErrorId : InvalidCastFromStringToInteger
+
+PS C:\Users\Andrew Eyre\tmp> ([int64]"154545454554572282828282828282828282285656564554545454542").gettype().name
+Cannot convert value "154545454554572282828282828282828282285656564554545454542" to type "System.Int64". Error: "Value was either too large or too small for an Int64."
+At line:1 char:1
++ ([int64]"154545454554572282828282828282828282285656564554545454542"). ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidArgument: (:) [], RuntimeException
+    + FullyQualifiedErrorId : InvalidCastFromStringToInteger
+
+PS C:\Users\Andrew Eyre\tmp> ([int64]"154545454554572282828282828282828282").gettype().name
+Cannot convert value "154545454554572282828282828282828282" to type "System.Int64". Error: "Value was either too large or too small for an Int64."
+At line:1 char:1
++ ([int64]"154545454554572282828282828282828282").gettype().name
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidArgument: (:) [], RuntimeException
+    + FullyQualifiedErrorId : InvalidCastFromStringToInteger
+
+PS C:\Users\Andrew Eyre\tmp> ([int64]"1545454545545722").gettype().name
+Int64
+PS C:\Users\Andrew Eyre\tmp> [bool]12
+True
+PS C:\Users\Andrew Eyre\tmp> [bool]"12"
+True
+PS C:\Users\Andrew Eyre\tmp> [bool]""
+False
+PS C:\Users\Andrew Eyre\tmp> [bool]" "
+True
+PS C:\Users\Andrew Eyre\tmp> [bool]True
+At line:1 char:7
++ [bool]True
++       ~~~~
+Unexpected token 'True' in expression or statement.
+    + CategoryInfo          : ParserError: (:) [], ParentContainsErrorRecordException
+    + FullyQualifiedErrorId : UnexpectedToken
+
+PS C:\Users\Andrew Eyre\tmp> [string]15
+15
+PS C:\Users\Andrew Eyre\tmp> [string]015
+15
+PS C:\Users\Andrew Eyre\tmp> [longlong]100gb
+Unable to find type [longlong].
+At line:1 char:2
++ [longlong]100gb
++  ~~~~~~~~
+    + CategoryInfo          : InvalidOperation: (longlong:TypeName) [], RuntimeException
+    + FullyQualifiedErrorId : TypeNotFound
+
+PS C:\Users\Andrew Eyre\tmp> [long][long]100gb
+107374182400
+PS C:\Users\Andrew Eyre\tmp> [long][long]500gb
+536870912000
+PS C:\Users\Andrew Eyre\tmp> [long][long]500tb
+549755813888000
+PS C:\Users\Andrew Eyre\tmp> [long][long]500pb
+562949953421312000
+PS C:\Users\Andrew Eyre\tmp> [long][long]500000000000000000000000000000pb
+Cannot convert value "5.62949953421312E+44" to type "System.Int64". Error: "Arithmetic operation resulted in an overflow."
+At line:1 char:1
++ [long][long]500000000000000000000000000000pb
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidArgument: (:) [], RuntimeException
+    + FullyQualifiedErrorId : InvalidCastIConvertible
+
+PS C:\Users\Andrew Eyre\tmp> [long][long][long]500000000000000000000000000000pb
+Cannot convert value "5.62949953421312E+44" to type "System.Int64". Error: "Arithmetic operation resulted in an overflow."
+At line:1 char:1
++ [long][long][long]500000000000000000000000000000pb
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidArgument: (:) [], RuntimeException
+    + FullyQualifiedErrorId : InvalidCastIConvertible
+
+PS C:\Users\Andrew Eyre\tmp> [long][long][long]50000000000000000000pb
+Cannot convert value "5.62949953421312E+34" to type "System.Int64". Error: "Arithmetic operation resulted in an overflow."
+At line:1 char:1
++ [long][long][long]50000000000000000000pb
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidArgument: (:) [], RuntimeException
+    + FullyQualifiedErrorId : InvalidCastIConvertible
+
+PS C:\Users\Andrew Eyre\tmp> [long][long]500000000000000000000000000000pb
+Cannot convert value "5.62949953421312E+44" to type "System.Int64". Error: "Arithmetic operation resulted in an overflow."
+At line:1 char:1
++ [long][long]500000000000000000000000000000pb
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidArgument: (:) [], RuntimeException
+    + FullyQualifiedErrorId : InvalidCastIConvertible
+
+PS C:\Users\Andrew Eyre\tmp> [long][long]500000000000000pb
+Cannot convert value "5.62949953421312E+29" to type "System.Int64". Error: "Arithmetic operation resulted in an overflow."
+At line:1 char:1
++ [long][long]500000000000000pb
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidArgument: (:) [], RuntimeException
+    + FullyQualifiedErrorId : InvalidCastIConvertible
+
+PS C:\Users\Andrew Eyre\tmp> [long][long]50000000000pb
+Cannot convert value "56294995342131200000000000" to type "System.Int64". Error: "Value was either too large or too small for an Int64."
+At line:1 char:1
++ [long][long]50000000000pb
++ ~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidArgument: (:) [], RuntimeException
+    + FullyQualifiedErrorId : InvalidCastIConvertible
+
+PS C:\Users\Andrew Eyre\tmp> [long][long]5000pb
+5629499534213120000
+PS C:\Users\Andrew Eyre\tmp> 6 + 9
+15
+PS C:\Users\Andrew Eyre\tmp> 6 - 9
+-3
+PS C:\Users\Andrew Eyre\tmp> 6 * 9
+54
+PS C:\Users\Andrew Eyre\tmp> 6 / 9
+0.666666666666667
+PS C:\Users\Andrew Eyre\tmp> 6 / 9 -as [int]
+1
+PS C:\Users\Andrew Eyre\tmp> 6 % 9
+6
+PS C:\Users\Andrew Eyre\tmp> 6
+6
+PS C:\Users\Andrew Eyre\tmp> [bool] 6
+True
+PS C:\Users\Andrew Eyre\tmp> 6 -and 9
+True
+PS C:\Users\Andrew Eyre\tmp> 6 -xor 9
+False
+PS C:\Users\Andrew Eyre\tmp> 6 -band 9
+0
+PS C:\Users\Andrew Eyre\tmp> 6 -bor 9
+15
+PS C:\Users\Andrew Eyre\tmp> 6 -xor 9
+False
+PS C:\Users\Andrew Eyre\tmp> 6 -bxor 9
+15
+PS C:\Users\Andrew Eyre\tmp> 1..3 + 5
+1
+2
+3
+5
+PS C:\Users\Andrew Eyre\tmp> 1..3 * 3
+1
+2
+3
+1
+2
+3
+1
+2
+3
+PS C:\Users\Andrew Eyre\tmp> 5 -lt 3
+False
+PS C:\Users\Andrew Eyre\tmp> $?
+True
+PS C:\Users\Andrew Eyre\tmp>
+PS C:\Users\Andrew Eyre\tmp> 1..3 | select {$_}
+
+$_
+--
+ 1
+ 2
+ 3
+
+
+PS C:\Users\Andrew Eyre\tmp> 1..3 * 3 | select {$_}
+
+$_
+--
+ 1
+ 2
+ 3
+ 1
+ 2
+ 3
+ 1
+ 2
+ 3
+
+
+PS C:\Users\Andrew Eyre\tmp> 1..3 | select {$_}, {$_ *4}
+
+$_ $_ *4
+-- -----
+ 1     4
+ 2     8
+ 3    12
+
+
+PS C:\Users\Andrew Eyre\tmp> 1..3 | select @{n="property1";e={$_}}, {$_ *5}
+
+property1 $_ *5
+--------- -----
+        1     5
+        2    10
+        3    15
+
+
+PS C:\Users\Andrew Eyre\tmp> 1..3 | select @{n="property1";e={$_}}, {$_ *5}
+
+property1 $_ *5
+--------- -----
+        1     5
+        2    10
+        3    15
+
+
+PS C:\Users\Andrew Eyre\tmp> 1..3 | select @{n="property1";e={$_}},
+>> @{n="property2";e={$_ *5}}
+
+property1 property2
+--------- ---------
+        1         5
+        2        10
+        3        15
+
+
+PS C:\Users\Andrew Eyre\tmp> 1..3 | format-table @{n="property1";e={$_}},
+>> @{n="property2";e={$_ *5}}
+1
+2
+3
+PS C:\Users\Andrew Eyre\tmp> 1..3 | format-list @{n="property1";e={$_}},
+>> @{n="property2";e={$_ *5}}
+1
+2
+3
+PS C:\Users\Andrew Eyre\tmp> $a = 8
+PS C:\Users\Andrew Eyre\tmp> $a
+8
+PS C:\Users\Andrew Eyre\tmp> $b = 7
+PS C:\Users\Andrew Eyre\tmp> $c = $a + $b
+PS C:\Users\Andrew Eyre\tmp> $c
+15
+PS C:\Users\Andrew Eyre\tmp> $a += 5
+PS C:\Users\Andrew Eyre\tmp> $a
+13
+PS C:\Users\Andrew Eyre\tmp> $b--
+PS C:\Users\Andrew Eyre\tmp> $b
+6
+PS C:\Users\Andrew Eyre\tmp> $b ++
+PS C:\Users\Andrew Eyre\tmp> $b ++
+PS C:\Users\Andrew Eyre\tmp> $b
+8
+PS C:\Users\Andrew Eyre\tmp> $d = get-date
+PS C:\Users\Andrew Eyre\tmp> $d
+
+Thursday, November 22, 2018 10:06:40 AM
+
+
+PS C:\Users\Andrew Eyre\tmp> $d
+
+Thursday, November 22, 2018 10:06:40 AM

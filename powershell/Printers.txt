@@ -1,0 +1,14 @@
+function get-printers {
+	get-wmi-object -class win32_printer |
+		select name,
+			@{n="default";e={if($_.attributes -band 4){attr="default"};$attr}},
+			@{n="shared";e={if($_.attributes -band 8){attr="shared"};$attr}},
+			@{n="status";e={switch($_.printerstatus){1{stat="other"}
+								2{stat="unknown"}
+								3{stat="idle"}
+								4{stat="printing"}
+								5{stat="warming up"}
+								6{stat="stopped printing"}
+								7{stat="offline"}
+								$stat}} |
+		ft -autosize Status, Shared, Default, Name

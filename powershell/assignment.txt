@@ -1,0 +1,80 @@
+$systeminfo = gwmi win32_computersystem | select Manufacturer, 
+Model,
+Caption,
+PrimaryOwnerName,
+SystemType |
+Format-List
+
+$biosinfo = gwmi win32_bios | select Manufacturer, 
+Description, 
+Version, 
+SMBBIOSBIOSVersion |
+Format-List
+
+$processorinfo = gwmi win32_processor | select Manufacturer,
+Name,
+NumberOfCores,
+MaxClockSpeed |
+Format-List
+
+$totalcapacity = 0
+get-wmiobject -class win32_physicalmemory | 
+foreach {
+   new-object -TypeName psobject -Property @{
+	Manufacturer = $_.manufacturer
+	"Size(MB)" = $_.capacity/1mb                        
+	"Speed(MHz)" = $_.speed
+	Bank = $_.banklabel
+        Slot = $_.devicelocator
+   }
+   $totalcapacity += $_.capacity/1mb
+   $InstalledRAM = Get-WmiObject -Class Win32_ComputerSystem
+   $usablecapacity += [Math]($InstalledRAM_.capacity/ 1mb)
+   $freecapacity += (gwmi win32_computersystem).freephysicalmemory/1mb
+} |
+ft -auto Manufacturer, "Size(MB)", "Speed(MHz)", Bank, Slot
+
+"Total RAM: ${totalcapacity}MB "
+"Usable Memory: ${usablecapacity}MB "
+"Free Memory: ${freecapacity}MB "
+
+
+"+-------------------+ 
+| PC Identification | 
++-------------------+" 
+$systeminfo
+
+"+---------------------+ 
+| BIOS Identification | 
++---------------------+" 
+$biosinfo
+
+"+--------------------------+ 
+| Processor Identification | 
++--------------------------+" 
+$processorinfo
+
+"+---------------------------------+ 
+| Memory Identification and Usage | 
++---------------------------------+" 
+
+
+"+---------------+ 
+| Storage Usage | 
++---------------+" 
+
+
+"+------------------------------------------+ 
+| Network Identification and Configuration | 
++------------------------------------------+" 
+ 
+ 
+"+---------------+ 
+| Graphics Info |
++---------------+" 
+
+
+ 
+"+-----------------------+ 
+| Operating System Info | 
++-----------------------+" 

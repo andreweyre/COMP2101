@@ -1,0 +1,157 @@
+PS C:\users\Andrew Eyre\tmp> gwmi win32_networkadapters
+gwmi : Invalid class "win32_networkadapters"
+At line:1 char:1
++ gwmi win32_networkadapters
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidType: (:) [Get-WmiObject], ManagementException
+    + FullyQualifiedErrorId : GetWMIManagementException,Microsoft.PowerShell.Commands.GetWmiObjectCommand
+
+PS C:\users\Andrew Eyre\tmp> gwmi win32_networkadapter
+
+
+ServiceName      : kdnic
+MACAddress       :
+AdapterType      :
+DeviceID         : 0
+Name             : Microsoft Kernel Debug Network Adapter
+NetworkAddresses :
+Speed            :
+
+ServiceName      : e1iexpress
+MACAddress       : 00:0C:29:83:1C:E4
+AdapterType      : Ethernet 802.3
+DeviceID         : 1
+Name             : Intel(R) 82574L Gigabit Network Connection
+NetworkAddresses :
+Speed            : 1000000000
+
+ServiceName      : RFCOMM
+MACAddress       :
+AdapterType      :
+DeviceID         : 2
+Name             : Bluetooth Device (RFCOMM Protocol TDI)
+NetworkAddresses :
+Speed            :
+
+ServiceName      : BthPan
+MACAddress       : E4:42:A6:3B:07:C1
+AdapterType      : Ethernet 802.3
+DeviceID         : 3
+Name             : Bluetooth Device (Personal Area Network)
+NetworkAddresses :
+Speed            : 3000000
+
+ServiceName      : tunnel
+MACAddress       :
+AdapterType      : Tunnel
+DeviceID         : 4
+Name             : Teredo Tunneling Pseudo-Interface
+NetworkAddresses :
+Speed            : 100000
+
+
+
+PS C:\users\Andrew Eyre\tmp> gwmi win32_networkadapter | ft
+
+ServiceName MACAddress        AdapterType    DeviceID Name                                       NetworkAddresses Speed
+----------- ----------        -----------    -------- ----                                       ---------------- -----
+kdnic                                        0        Microsoft Kernel Debug Network Adapter
+e1iexpress  00:0C:29:83:1C:E4 Ethernet 802.3 1        Intel(R) 82574L Gigabit Network Connection                  1000000000
+RFCOMM                                       2        Bluetooth Device (RFCOMM Protocol TDI)
+BthPan      E4:42:A6:3B:07:C1 Ethernet 802.3 3        Bluetooth Device (Personal Area Network)                    3000000
+tunnel                        Tunnel         4        Teredo Tunneling Pseudo-Interface                           100000
+
+
+PS C:\users\Andrew Eyre\tmp> $adapters = gwmi win32_networkadapter
+PS C:\users\Andrew Eyre\tmp> $adapters[1]
+
+
+ServiceName      : e1iexpress
+MACAddress       : 00:0C:29:83:1C:E4
+AdapterType      : Ethernet 802.3
+DeviceID         : 1
+Name             : Intel(R) 82574L Gigabit Network Connection
+NetworkAddresses :
+Speed            : 1000000000
+
+
+
+PS C:\users\Andrew Eyre\tmp> $filteredadapters = $adapters |
+>> Where-Object adaptertype -match "ethernet"
+PS C:\users\Andrew Eyre\tmp> $filteredadapters
+
+
+ServiceName      : e1iexpress
+MACAddress       : 00:0C:29:83:1C:E4
+AdapterType      : Ethernet 802.3
+DeviceID         : 1
+Name             : Intel(R) 82574L Gigabit Network Connection
+NetworkAddresses :
+Speed            : 1000000000
+
+ServiceName      : BthPan
+MACAddress       : E4:42:A6:3B:07:C1
+AdapterType      : Ethernet 802.3
+DeviceID         : 3
+Name             : Bluetooth Device (Personal Area Network)
+NetworkAddresses :
+Speed            : 3000000
+
+
+
+PS C:\users\Andrew Eyre\tmp> $filteredadapters.speed
+1000000000
+3000000
+PS C:\users\Andrew Eyre\tmp> $filteredadapters.speed / 1mb
+Method invocation failed because [System.Object[]] does not contain a method named 'op_Division'.
+At line:1 char:1
++ $filteredadapters.speed / 1mb
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidOperation: (op_Division:String) [], RuntimeException
+    + FullyQualifiedErrorId : MethodNotFound
+
+PS C:\users\Andrew Eyre\tmp> $filteredadapters[0].speed / 1mb
+953.67431640625
+PS C:\users\Andrew Eyre\tmp> $filteredadapters[1].speed / 1mb
+2.86102294921875
+PS C:\users\Andrew Eyre\tmp> $filteredadapters[1].speed / 1gb
+0.00279396772384644
+PS C:\users\Andrew Eyre\tmp> $filteredadapters[0].speed / 1gb
+0.931322574615479
+PS C:\users\Andrew Eyre\tmp> $filteredadapters | select name, speed
+
+name                                            speed
+----                                            -----
+Intel(R) 82574L Gigabit Network Connection 1000000000
+Bluetooth Device (Personal Area Network)      3000000
+
+
+PS C:\users\Andrew Eyre\tmp> $filteredadapters | select name, @{n="speed in MB/s"; e={$_.speed / 1000000}}
+
+name                                       speed in MB/s
+----                                       -------------
+Intel(R) 82574L Gigabit Network Connection          1000
+Bluetooth Device (Personal Area Network)               3
+
+
+PS C:\users\Andrew Eyre\tmp> $filteredadapters | select name, @{n="speed in MB/s"; e={$_.speed / 1000000}},
+>> MACAddress,
+>> Netenabled,
+>> PowerManagementSupported
+
+
+name                     : Intel(R) 82574L Gigabit Network Connection
+speed in MB/s            : 1000
+MACAddress               : 00:0C:29:83:1C:E4
+Netenabled               : True
+PowerManagementSupported : False
+
+name                     : Bluetooth Device (Personal Area Network)
+speed in MB/s            : 3
+MACAddress               : E4:42:A6:3B:07:C1
+Netenabled               : False
+PowerManagementSupported : False
+
+
+
+PS C:\users\Andrew Eyre\tmp>
