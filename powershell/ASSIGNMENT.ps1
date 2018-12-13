@@ -1,4 +1,4 @@
-function Get-PCID {                                                       #Create function Get-PCID
+﻿function Get-PCID {                                                       #Create function Get-PCID
   get-wmiobject -class win32_computersystem |                             #Get the computersystem objects
     select Manufacturer, Model, Caption,PrimaryOwnerName, SystemType |    #Pipe them to select Manufacturer, Model, Caption,PrimaryOwnerName, SystemType Objects
   Format-List Manufacturer, Model, Caption, PrimaryOwnerName, SystemType  #Pipe to format output in specified order as a list to print
@@ -22,10 +22,10 @@ function Get-Memory {                                                     #Creat
   get-wmiobject -class win32_physicalmemory |                             #Get the physical memory objects 
     foreach {                                                             #Pipe them to foreach to create new objects
       new-object -TypeName psobject -Property @{                          #Make a new object for each incoming memory object
-	    Manufacturer = $_.manufacturer                                #Create Manufacturer object
-	    "Size(MB)" = $_.capacity/1mb                                  #Create Size object of RAM in MB
-	    "Speed(MHz)" = $_.speed                                       #Create Speed object of RAM in MHz
-	    Bank = $_.banklabel                                           #Create Bank object for which bank RAM is in 
+	    Manufacturer = $_.manufacturer                                    #Create Manufacturer object
+	    "Size(MB)" = $_.capacity/1mb                                      #Create Size object of RAM in MB
+	    "Speed(MHz)" = $_.speed                                           #Create Speed object of RAM in MHz
+	    Bank = $_.banklabel                                               #Create Bank object for which bank RAM is in 
         Slot = $_.devicelocator                                           #Create Slot object where RAM is located
       }                                                                   #end of new object creation with custom properties above
       $totalcapacity += $_.capacity/1mb                                   #Add the current memory device object capacity to running total
@@ -54,42 +54,37 @@ function Get-Network {                                                          
     Where-Object {$_.NetConnectionID -Match "Ethernet" -or $_.NetConnectionID -Match "Wi-Fi"} |    #Pipe them to where-object and filter objects on NetConnectionID to show only Ethernet or Wi-Fi
       Foreach-Object{                                                                              #Pipe them to foreach to create new objects
 
-      $nac = @($_.GetRelated('Win32_NetworkAdapterConfiguration'))[0]                     #For the networkadapters filtered above get related items from NetworkAdapter Configuration objects
+      $nac = @($_.GetRelated('Win32_NetworkAdapterConfiguration'))[0]        #For the networkadapters filtered above get related items from NetworkAdapter Configuration objects
 
-      New-Object PSObject -Property @{                                                    #Make a new object for each incoming network adapter object
-        Name = $_.Name                                                                    #Create Name object with corresponding value
-        MAC = $_.MACAddress                                                               #Create MAC object with corresponding value
-        "Speed(MB/s)" = $_.speed / 1000000                                                #Create Speed(MB/s) object with speed value divided by 1000000
-        "IPV4 Addr" = $nac.IPAddress | where-object {$_ -notmatch ":"}                    #Create IPV4 Addr object from networkadapterconfiguration ipaddress object where object does not include :
-        "IPV4 Netmask" = $nac.IPSubnet | where-object {$_ -like "*.*.*.*"}                #Create IPV4 Netmask object from networkadapterconfiguration ipsubnet object where object pattern is like *.*.*.*
-        Gateway = $nac.DefaultIPGateway | where-object {$_ -notmatch ":"}                 #Create Gateway object from networkadapterconfiguration DefaultIPGateway object where object does not include :
-        "DNS Domain" = $nac.DNSDomain                                                     #Create DNS Domain object with corresponding value from networkadapterconfiguration
-        Hostname = $nac.DNSHostName                                                       #Create Hostname object with corresponding value from networkadapterconfiguration
-      }                                                                                   #end of new object creation with custom properties above
-    
-} | Format-List Name, MAC,"Speed(MB/s)", "IPV4 Addr",                                     #Pipe to format output in specified order as a list to print
-"IPV4 Netmask", Gateway, "DNS Domain", Hostname                              
-}                                                                                         #End of function Get-Network
+      New-Object PSObject -Property @{                                       #Make a new object for each incoming network adapter object
+        Name = $_.Name                                                       #Create Name object with corresponding value
+        MAC = $_.MACAddress                                                  #Create MAC object with corresponding value
+        "Speed(MB/s)" = $_.speed / 1000000                                   #Create Speed(MB/s) object with speed value divided by 1000000
+        "IPV4 Addr" = $nac.IPAddress | where-object {$_ -notmatch ":"}       #Create IPV4 Addr object from networkadapterconfiguration ipaddress object where object does not include :
+        "IPV4 Netmask" = $nac.IPSubnet | where-object {$_ -like "*.*.*.*"}   #Create IPV4 Netmask object from networkadapterconfiguration ipsubnet object where object pattern is like *.*.*.*
+        Gateway = $nac.DefaultIPGateway | where-object {$_ -notmatch ":"}    #Create Gateway object from networkadapterconfiguration DefaultIPGateway object where object does not include :
+        "DNS Domain" = $nac.DNSDomain                                        #Create DNS Domain object with corresponding value from networkadapterconfiguration
+        Hostname = $nac.DNSHostName                                          #Create Hostname object with corresponding value from networkadapterconfiguration
+      }                                                                      #end of new object creation with custom properties above
+    } | Format-List Name, MAC, "Speed(MB/s)", "IPV4 Addr", "IPV4 Netmask", Gateway, "DNS Domain", Hostname    #Pipe to format output in specified order as a list to print
+}                                                                                                             #End of function Get-Network
 
-function Get-Graphics {                                                                   #Create function Get-Graphics
-  get-wmiobject -class win32_videocontroller |                                            #Get the videocontroller objects
-    foreach {                                                                             #Pipe them to foreach to create new objects
-      new-object -TypeName psobject -Property @{                                          #Make a new object for each incoming graphics object
+function Get-Graphics {                                                               #Create function Get-Graphics
+  get-wmiobject -class win32_videocontroller |                                        #Get the videocontroller objects
+    foreach {                                                                         #Pipe them to foreach to create new objects
+      new-object -TypeName psobject -Property @{                                      #Make a new object for each incoming graphics object
 	  Name = $_.Name                                                                  #Create Name object with corresponding value
 	  VRAM = $_.AdapterRAM/1gb -as [int] | foreach-object {$_.tostring() + 'GB'}      #Create VRAM object from adapterRAM divide by gb and format as an integer, convert to string for each and add GB
 	  Resolution = $_.videomodedescription                                            #Create resolution object
-    }                                                                                     #end of new object creation with custom properties above
-  } | Format-List Name, VRAM, Resolution                                                  #Pipe to format output in specified order as a list to print
-}                                                                                         #end of function Get-Get-Graphics
+    }                                                                                 #end of new object creation with custom properties above
+  } | Format-List Name, VRAM, Resolution                                              #Pipe to format output in specified order as a list to print
+}                                                                                     #end of function Get-Get-Graphics
 
-function Get-OS {                                                                         #Create function Get-OS
-  get-wmiobject win32_operatingsystem |                                                   #Get the operatingsystem objects
-    select Manufacturer, Caption, Version, OSArchitecture, RegisteredUser |               #Pipe them to select Manufacturer, Caption, Version, OSArchitecture, RegisteredUser objects
-  Format-List Manufacturer, Caption, Version, OSArchitecture, RegisteredUser              #Pipe to format output in specified order as a list to print
-}                                                                                         #end of function Get-OS
-
-
-
+function Get-OS {                                                                     #Create function Get-OS
+  get-wmiobject win32_operatingsystem |                                               #Get the operatingsystem objects
+    select Manufacturer, Caption, Version, OSArchitecture, RegisteredUser |           #Pipe them to select Manufacturer, Caption, Version, OSArchitecture, RegisteredUser objects
+  Format-List Manufacturer, Caption, Version, OSArchitecture, RegisteredUser          #Pipe to format output in specified order as a list to print
+}                                                                                     #end of function Get-OS
 
 #REPORT STYLE PRODUCTION
 #Create titles with string creation
@@ -127,3 +122,5 @@ Get-Graphics
 | Operating System Info | 
 +-----------------------+" 
 Get-OS
+
+Pause
